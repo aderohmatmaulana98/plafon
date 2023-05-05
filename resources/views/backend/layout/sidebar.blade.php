@@ -80,6 +80,14 @@
                 </ul>
             </li>
         </ul>
+            
+        @else
+                <li class="menu-item ">
+                        <a href="#" class="menu-link">
+                            <div>Pemesanan</div>
+                        </a>
+                    </li>
+
     @endif
 
 </aside>
