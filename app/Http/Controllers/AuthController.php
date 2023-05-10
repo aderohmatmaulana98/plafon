@@ -27,7 +27,7 @@ class AuthController extends Controller
 
             $request->session()->regenerate();
             return redirect()->intended('/dashboard');
-        } elseif (Auth::attempt(['email' => $request->email, 'role' => 2])) {
+        } elseif (Auth::attempt(['email' => $request->email, 'role_id' => 2])) {
             $request->session()->regenerate();
             return redirect()->intended('/');
         }

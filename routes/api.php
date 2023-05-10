@@ -26,4 +26,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     //barang
     Route::get('/barang', [ApiAllController::class, 'barang']);
+    //distributor
+    Route::get('/distributor', [ApiAllController::class, 'distributor']);
+    Route::get('/count_manager', [ApiAllController::class, 'count_manager']);
+    Route::get('/penjab', [ApiAllController::class, 'penjab']);
+    Route::get('/users', [ApiAllController::class, 'users']);
 });

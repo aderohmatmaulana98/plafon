@@ -6,15 +6,22 @@
             <h5 class="mb-0" style="font-size: 20px">
                 <b>{{ $title }}</b>
             </h5>
-            <a href="/area/add" type="button" class="btn rounded-pill btn-primary justify-content-end"
-                style="margin-left: 70%;">Add</a>
+            {{-- <a href="/cm/add" type="button" class="btn rounded-pill btn-primary justify-content-end"
+                style="margin-left: 70%;">Add</a> --}}
         </div>
         <div class="container mt-4 ">
             <table id="datatable" class="table table-striped ">
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama Area</th>
+                        <th>COUNT MANAGER</th>
+                        <th>Kode DISTRIBUTOR</th>
+                        <th>DISTRIBUTOR</th>
+                        <th>PENANGGUNG JAWAB</th>
+                        <th>KONTAK</th>
+                        <th>ALAMAT</th>
+                        <th>AREA COVER</th>
+                        {{-- <th>JUMLAH AGEN/DISTRIBUTOR</th> --}}
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -22,14 +29,20 @@
                     @php
                         $no = 1;
                     @endphp
-                    @foreach ($area as $a)
+                    @foreach ($distributor as $a)
                         <tr>
                             <td>{{ $no++ }}</td>
-                            <td width="auto">{{ $a->nama_area }}</td>
+                            <td width="auto">{{ $a->nama_cm}}</td>
+                            <td width="auto">{{ $a->kode_distributor}}</td>
+                            <td width="auto">{{ $a->full_name}}</td>
+                            <td width="auto">{{ $a->nama_penjab}}</td>
+                            <td width="auto">{{ $a->kontak}}</td>
+                            <td width="auto">{{ $a->alamat}}</td>
+                            <td width="auto">{{ $a->area}}</td>
                             <td>
                                 {{-- <a href="/posts_/{{ $a->id }}" type="button" class="btn btn-primary"
                                     target="_blank">Live</a> --}}
-                                <a href="/area/edit/{{ $a->id }}" type="button" class="btn btn-success">Edit</a>
+                                <a href="/cm/edit/{{ $a->id }}" type="button" class="btn btn-success">Edit</a>
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                     data-bs-target="#delete{{ $a->id }}">Delete</button>
                             </td>
@@ -45,10 +58,10 @@
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <p>Anda yakin ingin menghapus {{ $a->nama_area }}</p>
+                                                <p>Anda yakin ingin menghapus {{ $a->nama_cm }}</p>
                                             </div>
                                             <div class="modal-footer">
-                                                <form action="{{  route('area.deleteArea', $a->id)  }}" method="POST">
+                                                <form action="{{  route('cm.deleteCM', $a->id)  }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                 <div class="px-5 pb-8 text-center">

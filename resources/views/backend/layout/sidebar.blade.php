@@ -14,7 +14,7 @@
     </div>
 
     <div class="menu-inner-shadow"></div>
-    @if (request()->user()->role == 1)
+    @if (request()->user()->role_id == 1)
         <ul class="menu-inner py-1">
             <li class="menu-item">
                 <a href="/dashboard" class="menu-link ">
@@ -39,15 +39,16 @@
                         </a>
                     </li>
                     <li class="menu-item ">
+                        <a href="/distributor" class="menu-link">
+                            <div>Kelola Distributor</div>
+                        </a>
+                    </li>
+                    <li class="menu-item ">
                         <a href="/penjab" class="menu-link">
                             <div>Kelola Penanggung Jawab</div>
                         </a>
                     </li>
-                    <li class="menu-item ">
-                        <a href="/area" class="menu-link">
-                            <div>Kelola Area</div>
-                        </a>
-                    </li>
+                    
                     <li class="menu-item ">
                         <a href="/bulan" class="menu-link">
                             <div>Kelola Bulan</div>
@@ -82,11 +83,20 @@
         </ul>
             
         @else
-                <li class="menu-item ">
-                        <a href="#" class="menu-link">
-                            <div>Pemesanan</div>
-                        </a>
-                    </li>
+        <ul class="menu-inner py-1">
+            <li class="menu-item">
+                <a href="/dashboard" class="menu-link ">
+                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                    <div>Dashboard</div>
+                </a>
+        <li class="menu-item ">
+            <a href="/pemesanan" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-book"></i>
+                <div>Pemesanan</div>
+            </a>
+        </li>
+    </ul>
+        
 
     @endif
 

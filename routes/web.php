@@ -8,6 +8,8 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\BulanController;
 use App\Http\Controllers\CountManagerController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DistributorController;
+use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\PenjabController;
 use App\Http\Controllers\RoleController;
 
@@ -59,14 +61,6 @@ Route::controller(PenjabController::class)->group( function (){
     Route::delete('/deletePenjab/{id}','deletePenjab')->name('penjab.deletePenjab');
 });
 
-Route::controller(AreaController::class)->group( function (){
-    Route::get('/area','index')->name('area');
-    Route::get('/area/add','add')->name('area.add');
-    Route::get('/area/edit/{id}','edit')->name('area.edit');
-    Route::post('/addArea','addArea')->name('area.addArea');
-    Route::post('/editArea/{id}','editArea')->name('area.editArea');
-    Route::delete('/deleteArea/{id}','deleteArea')->name('area.deleteArea');
-});
 
 Route::controller(BulanController::class)->group( function (){
     Route::get('/bulan','index')->name('bulan');
@@ -84,6 +78,14 @@ Route::controller(CountManagerController::class)->group( function (){
     Route::post('/addCM','addCM')->name('cm.addCM');
     Route::post('/editCM/{id}','editCM')->name('cm.editCM');
     Route::delete('/deleteCM/{id}','deleteCM')->name('cm.deleteCM');
+});
+
+Route::controller(DistributorController::class)->group( function (){
+    Route::get('/distributor','index')->name('distributor');
+});
+
+Route::controller(PemesananController::class)->group( function (){
+    Route::get('/pemesanan','index')->name('pemesanan');
 });
 
 });

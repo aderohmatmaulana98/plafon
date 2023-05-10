@@ -58,7 +58,7 @@ class RoleController extends Controller
             ], 404);
         }
 
-        // Update data pemasukan
+        // Update data role
             $role->role = $request->role;
             $role->updated_at = now();
 
