@@ -7,7 +7,7 @@
             <h5 class="mb-0" style="font-size: 20px">
                 <b>{{ $title }}</b>
             </h5>
-            <a href="/distributor/add" type="button" class="btn rounded-pill btn-primary justify-content-end"
+            <a href="/penjualan/add" type="button" class="btn rounded-pill btn-primary justify-content-end"
                 style="margin-left: 70%;">Add</a>
         </div>
         <div class="container mt-4 ">
@@ -15,13 +15,13 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        {{-- <th>Kode DISTRIBUTOR</th> --}}
+                        <th>COUNT MANAGER</th>
+                        <th>Kode DISTRIBUTOR</th>
                         <th>DISTRIBUTOR</th>
-                        <th>PENANGGUNG JAWAB</th>
-                        <th>KONTAK</th>
-                        {{-- <th>ALAMAT</th> --}}
-                        <th>AREA COVER</th>
-                        <th>JUMLAH AGEN/DISTRIBUTOR</th>
+                        <th>AREA</th>
+                        <th>TOTAL PEMBELIAN</th>
+                        <th>TOTAL</th>
+                        <th>RETUR</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -29,30 +29,35 @@
                     @php
                         $no = 1;
                     @endphp
-                    @foreach ($distributor as $a)
+                    @foreach ($data as $item)
                         <tr>
                             <td>{{ $no++ }}</td>
-                            {{-- <td width="auto">{{ $a->kode_distributor}}</td> --}}
-                            <td width="auto">{{ $a->full_name}}</td>
-                            <td width="auto">{{ $a->nama_penjab}}</td>
-                            <td width="auto">{{ $a->kontak}}</td>
-                            <td width="auto">{{ $a->area}}</td>
-                            <td width="auto">
-                              @if ($a->jumlah_agen == null)
-
-                              <span>-</span>
-                              
-                              @else
-                                    {{ $a->jumlah_agen}}
-                              @endif  
-                            </td>
+                            <td width="auto">Ngaing</td>
+                            <td width="auto">{{ $item->kode_distributor}}</td>
+                            <td width="auto">Sedul</td>
+                            <td width="auto">{{ $item->area}}</td>
+                            @if ($item->total_penjualan)
+                                    @php
+                                    $jsonData = json_decode($item->total_penjualan, true);
+                                    @endphp
+                                    <td width="auto"> {{ $jsonData['januari'] }}</td>
+                                    <td width="auto"> {{ $jsonData['februari'] }}</td>
+                                    <td width="auto"> {{ $jsonData['maret'] }}</td>
+                                    <td width="auto"> {{ $jsonData['april'] }}</td>
+                                    <td width="auto"> {{ $jsonData['mei'] }}</td>
+                            @else
+                            <td width="auto">-</td>
+                            <td width="auto">-</td>
+                            @endif
+                            <td width="auto">{{ $item->total}}</td>
+                            <td width="auto">{{ $item->retur}}</td>
                             <td>
-                                <a href="{{ route('detail.distributor', $a->id) }}" <i class="far fa-eye badge-primary"></i></a>
-                                <a href="/cm/edit/{{ $a->id }}"> <i class="fas fa-edit badge-success"></i></a>
+                                <a href=""> <i class="far fa-eye badge-primary"></i></a>
+                                <a href=""> <i class="fas fa-edit badge-success"></i></a>
                                 <i class="fas fa-trash badge-danger" data-bs-toggle="modal"
-                                    data-bs-target="#delete{{ $a->id }}"></i> 
+                                    data-bs-target="#delete"></i> 
                             </td>
-                            <div class="modal fade" id="delete{{ $a->id }}" tabindex="-1" role="dialog"
+                            <div class="modal fade" id="delete" tabindex="-1" role="dialog"
                                 aria-labelledby="deletemodal" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-dialog">
@@ -64,10 +69,10 @@
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <p>Anda yakin ingin menghapus {{ $a->full_name }}</p>
+                                                <p>Anda yakin ingin menghapus </p>
                                             </div>
                                             <div class="modal-footer">
-                                                <form action="{{  route('distributor.deleteDistributor', $a->id)  }}" method="POST">
+                                                <form action="" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     

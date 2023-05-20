@@ -39,8 +39,7 @@
                             </p>
 
                         </div>
-                        <hr style="margin-left: 23px;
-margin-right: 23px;">
+                        <hr style="margin-left: 23px; margin-right: 23px;">
                         <div class="card-footer" style="margin-top: -30px; margin-left: 85px;">
                             <a href="/detailBarang/{{ $br->id }}" class="btn btn-primary">Pesan</a>
                         </div>

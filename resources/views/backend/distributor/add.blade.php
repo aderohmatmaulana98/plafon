@@ -8,16 +8,17 @@
                     <h5 class="mb-0" style="font-size: 40px">{{ $title }}</h5>
                 </div>
                 <div class="card-body">
-                    <form action="/addBarang" method="POST" enctype="multipart/form-data">
+                    <form action="/addDistributor" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label" for="nama_barang">Nama Barang</label>
-                                    <input type="text" class="form-control" id="nama_barang" name="nama_barang"
-                                        placeholder="Masukan Nama Barang" required/>
+                                    <label class="form-label" for="kode_distributor">Kode Distributor</label>
+                                    <input type="number" class="form-control" id="kode_distributor" name="kode_distributor"
+                                        placeholder="Masukan kode distributor" />
                                 </div>
                             </div>
+                            
 
                             {{-- <div class="col-md-6">
                                 <div class="mb-3">
@@ -37,49 +38,71 @@
                             </div> --}}
 
                             <div class="col-md-6">
+                                <label class="form-label" for="jenis">Count Manager</label>
+                                <select class="form-select form-select" aria-label=".form-select-sm example" name="count_manager_id" id="count_manager_id">
+                                <option selected>-Pilih Count Manager-</option>
+                                         @foreach($cm as $c)
+                                        <option value="{{ $c->id }}" >{{ $c->nama_cm }}</option>
+                                        @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label" for="jenis">Jenis</label>
-                                    <input type="text" class="form-control" id="jenis" name="jenis"
-                                        placeholder="Masukan Jenis" />
+                                    <label class="form-label" for="full_name">Nama Distributor</label>
+                                    <input type="text" class="form-control" id="full_name"  name="full_name"
+                                       value="" placeholder="Masukan Nama Distributor" />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label" for="harga">Harga</label>
-                                    <input type="text" class="form-control" id="harga" name="harga"
-                                        placeholder="Masukan Harga" />
+                                    <label class="form-label" for="penjab_id">Penanggung Jawab</label>
+                                    <select class="form-select form-select" aria-label=".form-select-sm example" name="penjab_id" id="penjab_id">
+                                        <option selected>-Pilih Penanggung Jawab-</option>
+                                                 @foreach($penjab as $pj)
+                                                <option value="{{ $pj->id }}" >{{ $pj->nama_penjab }}</option>
+                                                @endforeach
+                                        </select>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label" for="ukuran">Ukuran</label>
-                                    <input type="text" class="form-control" id="ukuran" name="ukuran"
-                                        placeholder="Masukan Ukuran" />
+                                    <label class="form-label" for="email">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email"
+                                        placeholder="Masukan Email">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label" for="stok">Stok</label>
-                                    <input type="number" class="form-control" id="stok" name="stok"
-                                        placeholder="Masukan Jenis"
-                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" />
+                                    <label class="form-label" for="kontak">Kontak/No HP</label>
+                                    <input type="number" class="form-control" id="kontak" name="kontak"
+                                        placeholder="Masukan No Hp">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label" for="keyword">Image</label>
-                                    <input type="file" class="form-control" id="image" name="image"
-                                        placeholder="Thumbnail" />
+                                    <label class="form-label" for="alamat">Alamat</label>
+                                    <textarea type="text" class="form-control" id="alamat" name="alamat"
+                                        placeholder="Masukan alamat"> </textarea>
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <textarea name="deskripsi" id="editor1" cols="30" rows="10"></textarea>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label" for="area">Area Cover</label>
+                                    <input type="text" class="form-control" id="area" name="area"
+                                        placeholder="Masukan area">
+                                </div>
                             </div>
-
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label" for="jumlah_agen">Jumlah Agen / Distributor</label>
+                                    <input type="text" class="form-control" id="jumlah_agen" name="jumlah_agen"
+                                        placeholder="Masukan Jumlah agen">
+                                </div>
+                            </div>
                             <div class="col-md-12">
                                 <br>
                                 <button type="submit" class="btn btn-primary">Tambah</button>
-                                <a href="/barang" type="button" class="btn btn-success">Kembali</a>
+                                <a href="/distributor" type="button" class="btn btn-success">Kembali</a>
                             </div>
                     </form>
                 </div>

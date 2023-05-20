@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -33,6 +34,12 @@ class ApiAuthController extends Controller
             'user' => $user,
         ]);
     }
+
+    public function me(Request $request)
+    {
+        return response()->json(Auth::user());
+    }
+    
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();

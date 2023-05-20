@@ -3,34 +3,143 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Distributor;
+use App\Models\User;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DistributorController extends Controller
 {
    public function index()
    {
-        $data['title'] = 'Kelola Distributor';
+         $data['title'] = 'Kelola Distributor';
 
-            $token = session('access_token');
-            // $response3 = Http::withToken("$token")->get('http://127.0.0.1:8000/api/users');
-            // $response2 = Http::withToken("$token")->get('http://127.0.0.1:8000/api/count_manager');
-            // $response1 = Http::withToken("$token")->get('http://127.0.0.1:8000/api/penjab');
-            $response = Http::withToken("$token")->get('https://127.0.0.1:8000/api/distributor');
-            $body = $response->getBody();
-            // $body3 = $response3->getBody();
-            // $body2 = $response2->getBody();
-            // $body1 = $response1->getBody();
-            // $data3['users'] = json_decode($body3, true);
-            // $data3['users'] = $data3['users']['data'];
-            // $data2['count_manager'] = json_decode($body2, true);
-            // $data2['count_manager'] = $data2['count_manager']['data'];
-            // $data1['penjab'] = json_decode($body1, true);
-            // $data1['penjab'] = $data1['penjab']['data'];
-            $data['distributor'] = json_decode($body, true);
-            $data['distributor'] = $data['distributor']['data'];
+         $distributor = DB::table('distributor')
+         ->join('count_manager', 'count_manager.id', '=','distributor.count_manager_id')
+         ->join('penjab','penjab.id','=','distributor.penjab_id')
+         ->join('users','users.id','=','distributor.users_id')
+         ->select('distributor.id','distributor.kode_distributor','distributor.kontak','distributor.alamat','distributor.area','distributor.jumlah_agen',
+         'count_manager.nama_cm', 'penjab.nama_penjab','users.full_name','users.email','users.password')
+         ->where('users.role_id','=','2')
+         ->get();
 
-            return view('backend.distributor.index', $data);
+         
+
+         return view('backend.distributor.index', ['distributor' => $distributor], $data);
+   }
+
+   public function add()
+    {
+        $data['title'] = "Tambah Distributor";
+        $cm = DB::table('count_manager')->get();
+        $penjab = DB::table('penjab')->get();
+        return view('backend.distributor.add', ['cm' => $cm, 'penjab' => $penjab], $data);
+    }
+
+    public function edit($id)
+    {
+        $data['title'] = "Edit Distributor";
+        $data['distributor'] = DB::table('distributor')->where('id', $id)->first();
+        return view('backend.distributor.edit', $data);
+    }
+
+   public function detailDistributor($id)
+   {
+      $data['title'] = 'Detail Distributor';
+
+      $distributor = DB::table('distributor')
+         ->join('count_manager', 'count_manager.id', '=', 'distributor.count_manager_id')
+         ->join('users', 'users.id', '=', 'distributor.users_id')
+         ->join('penjab', 'penjab.id', '=', 'distributor.penjab_id')
+         ->select('users.full_name','users.email','users.password','count_manager.nama_cm','count_manager.id',
+         'penjab.nama_penjab','distributor.*')
+         ->where('distributor.id', '=', $id)
+         ->where('users.role_id','=','2')
+         ->get();
+
+      return view('backend.distributor.detail_distributor', ['distributor'=> $distributor], $data);
+   }
+
+   public function addDistributor(Request $request)
+   {
+      $request->validate(
+
+         [  
+            'full_name' => 'required',
+            'email' => 'required|unique:users,email',
+            'password' => 'reqired',
+         ],
+         [
+             'count_manager_id' => 'required',
+             'kode_distributor' => 'required',
+             'penjab_id' => 'required',
+         ]
+      );
+
+      $id_user = rand(000000, 999999);
+        $user = [
+            'id' =>  $id_user,
+            'full_name' => $request->full_name,
+            'email' => $request->email,
+            'password' => bcrypt('Panorama999'),
+            'role_id' => 2,
+            'is_active' => 1,
+            'created_at' => now(),
+        ];
+
+        $distributor = [
+            'count_manager_id' => $request->count_manager_id,
+            'kode_distributor' => $request->kode_distributor,
+            'users_id' => $id_user,
+            'penjab_id' => $request->penjab_id,
+            'kontak' => $request->kontak,
+            'alamat' => $request->alamat,
+            'area' => $request->area,
+            'jumlah_agen' => $request->jumlah_agen,
+            'created_at' => now(),
+        ];
+
+        DB::table('users')->insert($user);
+        DB::table('distributor')->insert($distributor);
+
+        Alert::success('Data Distributor berhasil ditambah');
+        return redirect()
+            ->route('distributor');
+   }
+
+   public function editDistributor(Request $request, $id)
+   {
+      
+   }
+
+   public function deleteDistributor($id)
+   {
+     
+      DB::beginTransaction();
+
+      try {
+        // Hapus data dari table1 berdasarkan id
+        DB::table('distributor')->where('id', '=', $id)->delete();
+    
+        // Hapus data dari table2 berdasarkan id dan role_id
+        DB::table('users')->where([
+            ['id', '=', $id],
+            ['role_id', '=', 2],
+        ])->delete();
+    
+        DB::commit();
+        return true;
+      } catch (\Exception $e) {
+        DB::rollback();
+        return false;
+      }
+
+
+      Alert::success('Data berhasil dihapus');
+      return redirect() 
+          ->route('distributor');
    }
 }

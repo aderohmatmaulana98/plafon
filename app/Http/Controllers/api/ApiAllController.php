@@ -5,12 +5,26 @@ namespace App\Http\Controllers\api;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Response;
 
 class ApiAllController extends Controller
 {
     public function barang()
     {
         $barang = DB::select('select * from barang');
+        return response()->json([
+            'success' => true,
+            'message' => 'Data berhasil ditampilkan',
+            'data' => $barang
+        ]);
+    }
+
+    public function get_barang_by_id($id)
+    {
+        $barang = DB::table('barang')
+            ->where('id', '=', $id)
+            ->get();
+
         return response()->json([
             'success' => true,
             'message' => 'Data berhasil ditampilkan',
@@ -64,5 +78,37 @@ class ApiAllController extends Controller
             'message' => 'Data berhasil ditampilkan',
             'data' => $users
         ]);
+    }
+
+    public function tambah_distributor(Request $request)
+    {
+        $validate = $request->validate([
+            'count_manager_id' => 'required',
+            'kode_distributor' => 'required',
+            'users_id' => 'required',
+            'penjab_id' => 'required',
+            'kontak' => 'required',
+            'alamat' => 'required',
+            'area' => 'required',
+            'jumlah_agen' => 'required',
+        ]);
+
+        $distributor = DB::table('distributor')->insert([
+
+                'count_manager_id' => $request->count_manager_id,
+                'kode_distributor' => $request->kode_distributor,
+                'users_id' => $request->users_id,
+                'penjab_id' => $request->penjab_id,
+                'kontak' => $request->kontak,
+                'alamat' => $request->alamat,
+                'area' => $request->area,
+                'jumlah_agen' => $request->jumlah_agen,
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Data Distributor berhasil ditambah',
+                'data' => $distributor
+            ], Response::HTTP_OK);
     }
 }

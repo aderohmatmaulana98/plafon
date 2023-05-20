@@ -8,14 +8,18 @@
                     <h5 class="mb-0" style="font-size: 40px">{{ $title }}</h5>
                 </div>
                 <div class="card-body">
-                    <form action="/addBarang" method="POST" enctype="multipart/form-data">
+                    <form action="/addPenjualan" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label" for="nama_barang">Nama Barang</label>
-                                    <input type="text" class="form-control" id="nama_barang" name="nama_barang"
-                                        placeholder="Masukan Nama Barang" required/>
+                                    <label class="form-label" for="distributor_id">Nama Distributor</label>
+                                    <select class="form-select form-select" aria-label=".form-select-sm example" name="distributor_id" id="distributor_id">
+                                        <option selected>-Pilih Distributor-</option>
+                                                 @foreach($distributor as $pj)
+                                                <option value="{{ $pj->id }}" >{{ $pj->kode_distributor }}</option>
+                                                @endforeach
+                                        </select>
                                 </div>
                             </div>
 
@@ -38,48 +42,57 @@
 
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label" for="jenis">Jenis</label>
-                                    <input type="text" class="form-control" id="jenis" name="jenis"
-                                        placeholder="Masukan Jenis" />
+                                    <label class="form-label" for="januari">Total Pembelian Januari</label>
+                                    <input type="number" class="form-control" id="januari" name="januari"
+                                        placeholder="Masukan total" />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label" for="harga">Harga</label>
-                                    <input type="text" class="form-control" id="harga" name="harga"
-                                        placeholder="Masukan Harga" />
+                                    <label class="form-label" for="februari">Total Pembelian Februari</label>
+                                    <input type="number" class="form-control" id="februari" name="februari"
+                                        placeholder="Masukan total" />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label" for="ukuran">Ukuran</label>
-                                    <input type="text" class="form-control" id="ukuran" name="ukuran"
-                                        placeholder="Masukan Ukuran" />
+                                    <label class="form-label" for="maret">Total Pembelian Maret</label>
+                                    <input type="number" class="form-control" id="maret" name="maret"
+                                        placeholder="Masukan total" />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label" for="stok">Stok</label>
-                                    <input type="number" class="form-control" id="stok" name="stok"
-                                        placeholder="Masukan Jenis"
-                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" />
+                                    <label class="form-label" for="april">Total Pembelian April</label>
+                                    <input type="number" class="form-control" id="april" name="april"
+                                        placeholder="Masukan total" />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label class="form-label" for="keyword">Image</label>
-                                    <input type="file" class="form-control" id="image" name="image"
-                                        placeholder="Thumbnail" />
+                                    <label class="form-label" for="mei">Total Pembelian Mei</label>
+                                    <input type="number" class="form-control" id="mei" name="mei"
+                                        placeholder="Masukan total" />
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <textarea name="deskripsi" id="editor1" cols="30" rows="10"></textarea>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label" for="total">Total</label>
+                                    <input type="number" class="form-control" id="total" name="total"
+                                        placeholder="Masukan total" />
+                                </div>
                             </div>
-
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label" for="retur">Retur</label>
+                                    <input type="text" class="form-control" id="retur" name="retur"
+                                        placeholder="Masukan Retur" />
+                                </div>
+                            </div>
                             <div class="col-md-12">
                                 <br>
                                 <button type="submit" class="btn btn-primary">Tambah</button>
-                                <a href="/barang" type="button" class="btn btn-success">Kembali</a>
+                                <a href="/penjualan" type="button" class="btn btn-success">Kembali</a>
                             </div>
                     </form>
                 </div>

@@ -22,13 +22,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/login', [ApiAuthController::class, 'login']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('/me', [ApiAuthController::class, 'me']);
     Route::get('/logout', [ApiAuthController::class, 'logout']);
 
     //barang
     Route::get('/barang', [ApiAllController::class, 'barang']);
+    Route::get('/get_barang_by_id/{id}', [ApiAdminController::class, 'get_barang_by_id']);
+
     //distributor
     Route::get('/distributor', [ApiAllController::class, 'distributor']);
     Route::get('/count_manager', [ApiAllController::class, 'count_manager']);
     Route::get('/penjab', [ApiAllController::class, 'penjab']);
     Route::get('/users', [ApiAllController::class, 'users']);
+    Route::post('/tambah_distributor',[ApiAllController::class,'tambah_distributor']);
 });

@@ -11,7 +11,9 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DistributorController;
 use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\PenjabController;
+use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\RoleController;
+use App\Models\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,9 +32,9 @@ Route::get('/', function () {
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'login_action'])->name('login.action');
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+
     //barang
     Route::get('/barang', [BarangController::class, 'index'])->name('barang');
     Route::get('/barang/add', [BarangController::class, 'add'])->name('barang.add');
@@ -82,13 +84,24 @@ Route::controller(CountManagerController::class)->group( function (){
 
 Route::controller(DistributorController::class)->group( function (){
     Route::get('/distributor','index')->name('distributor');
+    Route::get('/distributor/add','add')->name('distributor.add');
+    Route::get('/distributor/edit','edit')->name('distributor.edit');
+    Route::get('/detail_distributor/{id}','detailDistributor')->name('detail.distributor');
+    Route::post('/addDistributor','addDistributor')->name('distributor.addDistributor');
+    Route::post('/editDistributor/{id}','editDistributor')->name('distributor.editDistributor');
+    Route::delete('/deleteDistributor/{id}','deleteDistributor')->name('distributor.deleteDistributor');
+});
+
+Route::controller(PenjualanController::class)->group( function(){
+    Route::get('penjualan','index')->name('penjualan');
+    Route::get('/penjualan/add','add')->name('penjualan.add');
+    Route::post('/addPenjualan','addPenjualan')->name('penjualan.addPenjualan');
 });
 
 Route::controller(PemesananController::class)->group( function (){
     Route::get('/pemesanan','index')->name('pemesanan');
 });
 
-});
 
 Route::get('/route-cache', function () {
     Artisan::call('route:cache');

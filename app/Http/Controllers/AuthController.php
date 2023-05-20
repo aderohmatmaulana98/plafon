@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\User;
@@ -16,25 +17,23 @@ class AuthController extends Controller
     }
     public function login_action(Request $request)
     {
-        $request->validate([
-            'email' => 'required',
-            'password' => 'required',
-        ]);
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            $session = User::where('email', $request->email)->first();
-            // dd($session);
-            Session::put('full_name', $session->full_name);
+        $client = new Client();
+        $response = $client->request('POST','http://plavon.dlhcode.com/api/login',[
+            'form_params' =>[
+                'email' => $request->email,
+                'password' => $request->password,
 
-            $request->session()->regenerate();
-            return redirect()->intended('/dashboard');
-        } elseif (Auth::attempt(['email' => $request->email, 'role_id' => 2])) {
-            $request->session()->regenerate();
-            return redirect()->intended('/');
-        }
-
-        return back()->withInput()->withErrors([
-            'password' => 'Wrong username or password',
-        ]);
+            ]
+            ]);
+            $body = $response->getbody();
+            $data = json_decode($body, true);
+            
+            if(isset($data['data'])){
+                session(['access_token' => $data['data']]);
+                return redirect()->route('index');
+            }else{
+                return redirect()->back();
+            }
     }
     public function logout(Request $request)
     {

@@ -63,4 +63,5 @@ class Helper
     //     $count = DB::select("select count(c.id) as countComments from comments c left join users u on c.user_id=u.id where c.status = 2");
     //     return $count[0];
     // }
+    
 }

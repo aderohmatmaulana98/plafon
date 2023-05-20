@@ -14,7 +14,7 @@
     </div>
 
     <div class="menu-inner-shadow"></div>
-    @if (request()->user()->role_id == 1)
+   
         <ul class="menu-inner py-1">
             <li class="menu-item">
                 <a href="/dashboard" class="menu-link ">
@@ -59,6 +59,11 @@
                             <div>Kelola Count Manager</div>
                         </a>
                     </li>
+                    <li class="menu-item ">
+                        <a href="/penjualan" class="menu-link">
+                            <div>Penjualan</div>
+                        </a>
+                    </li>
                     {{-- <li class="menu-item ">
                         <a href="/users" class="menu-link">
                             <div>Users</div>
@@ -82,8 +87,8 @@
             </li>
         </ul>
             
-        @else
-        <ul class="menu-inner py-1">
+     
+        {{-- <ul class="menu-inner py-1">
             <li class="menu-item">
                 <a href="/dashboard" class="menu-link ">
                     <i class="menu-icon tf-icons bx bx-home-circle"></i>
@@ -95,9 +100,9 @@
                 <div>Pemesanan</div>
             </a>
         </li>
-    </ul>
+    </ul> --}}
         
 
-    @endif
+  
 
 </aside>
