@@ -42,8 +42,8 @@ class DistributorController extends Controller
     public function edit($id)
     {
         $data['title'] = "Edit Distributor";
-        $data['distributor'] = DB::table('distributor')->where('id', $id)->first();
-        return view('backend.distributor.edit', $data);
+        $distributor['distributor'] = DB::table('distributor')->where('id', $id)->first();
+        return view('backend.distributor.edit', ['distributor' => $distributor], $data);
     }
 
    public function detailDistributor($id)

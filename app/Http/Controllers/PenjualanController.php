@@ -13,38 +13,49 @@ class PenjualanController extends Controller
     public function index()
     {
         $title['title'] = "Penjualan";
-        $data = Penjualan::with('distributor')->get();
-        
 
-        return view('backend.penjualan.index', compact('data') , $title);
+        $penjualan = DB::table('penjualan')
+        ->join('distributor', 'distributor.id', '=' , 'penjualan.distributor_id')
+        ->join('count_manager', 'count_manager.id', '=', 'distributor.count_manager_id')
+        ->join('users','users.id','=','distributor.users_id')
+        ->select('penjualan.*', 'distributor.count_manager_id','distributor.kode_distributor',
+          'distributor.area','users.full_name','count_manager.nama_cm')
+        ->get();
+
+        //dd($penjualan);
+
+        return view('backend.penjualan.index', ['penjualan' => $penjualan] , $title);
     }
 
     public function add()
     {
         $data['title'] = "Tambah Penjualan";
-        $data1 = DB::table('distributor')->get();
+        $data1 = DB::table('distributor')
+        ->join('users','users.id','=','distributor.users_id')
+        ->select('distributor.id','distributor.count_manager_id','distributor.kode_distributor',
+          'distributor.area','users.full_name')
+        ->get();
         return view('backend.penjualan.add',['distributor' => $data1], $data);
     }
 
     public function addPenjualan(Request $request)
     {
-        $data = [
-            'total_pembelian' => json_encode([
-                'januari' => $request->input('januari'),
-                'februari' => $request->input('februari'),
-                'maret' => $request->input('maret'),
-                'april' => $request->input('april'),
-                'mei' => $request->input('mei')
-            ]),
-            'distributor_id' => $request->input('distributor_id'),
-            'total' => $request->input('total'),
-            'retur' => $request->input('retur')
-        ];
+        $validatedData = $request->validate([
+            'distributor_id' => 'required',
+        ]);
 
-        Penjualan::create($data);
+        $input = $request->only(['distributor_id', 'nilai1', 'nilai2', 'nilai3', 'nilai4', 'nilai5', 'nilai6', 'nilai7', 'nilai8', 'nilai9', 'nilai10', 'nilai11', 'nilai12']);
+        $input['total'] = array_sum($input);
+
+        Penjualan::create($input);
 
         Alert::success('Data Penjualan berhasil ditambah');
         return redirect()
             ->route('penjualan');
+    }
+
+    public function edit()
+    {
+        
     }
 }

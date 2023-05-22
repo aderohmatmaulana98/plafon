@@ -13,5 +13,11 @@ class Pemesanan extends Model
 
     protected $fillable = [ //kolom yang diizinkan diisi secara massal
         'id',
+        'id_pemesanan',
+        'id_barang',
+        'jumlah',
+        'harga',
+        'status',
+        'order',
     ];
 }

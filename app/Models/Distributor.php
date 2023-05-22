@@ -22,4 +22,9 @@ class Distributor extends Model
         'area',
         'jumlah_agen',
     ];
+
+    public function penjualan()
+    {
+        return $this->hasMany(Penjualan::class, 'distributor_id', 'id');
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Pemesanan;
 use Illuminate\Http\Response;
 
 class ApiAllController extends Controller
@@ -70,16 +71,6 @@ class ApiAllController extends Controller
         ]);
     }
 
-    public function users()
-    {
-        $users = DB::select('select * from users where role_id = 2');
-        return response()->json([
-            'success' => true,
-            'message' => 'Data berhasil ditampilkan',
-            'data' => $users
-        ]);
-    }
-
     public function tambah_distributor(Request $request)
     {
         $validate = $request->validate([
@@ -110,5 +101,29 @@ class ApiAllController extends Controller
                 'message' => 'Data Distributor berhasil ditambah',
                 'data' => $distributor
             ], Response::HTTP_OK);
+    }
+
+    public function pemesanan()
+    {
+        $pemesanan = DB::table('pemesanan')
+        ->join('barang','barang.id','=','pemesanan.id_barang')
+        ->select('pemesanan.*','barang.nama_barang','barang.jenis','barang.harga','barang.ukuran')
+        ->get();
+        return response()->json([
+            'success' => true,
+            'message' => 'Data berhasil ditampilkan',
+            'data' => $pemesanan
+        ]);
+    }
+
+    public function delete_pemesanan($id)
+    {
+        $pemesanan = Pemesanan::findOrFail($id);
+        $pemesanan->delete();
+        return response()->json([
+            'success' => true,
+            'message' => 'Role berhasil dihapus',
+            'data' => $pemesanan
+        ]);
     }
 }

@@ -35,4 +35,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/penjab', [ApiAllController::class, 'penjab']);
     Route::get('/users', [ApiAllController::class, 'users']);
     Route::post('/tambah_distributor',[ApiAllController::class,'tambah_distributor']);
+
+    //pemesanan
+    Route::get('/pemesanan',[ApiAllController::class, 'pemesanan']);
+    Route::delete('/delete_pemesanan',[ApiAllController::class, 'delete_pemesanan']);
 });

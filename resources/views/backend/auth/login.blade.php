@@ -3,7 +3,7 @@
 <!-- Google Tag Manager (noscript) (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
 
 <!-- Content -->
-<div class="container-xxl">
+<div class="container-xxxl wrap-login100">
     <div class="authentication-wrapper authentication-basic container-p-y">
         <div class="authentication-inner">
             <!-- Register -->
@@ -59,12 +59,13 @@
                                     </g>
                                 </svg>
                             </span>
-                            <span class="app-brand-text demo text-body fw-bolder">Sneat</span>
+                            <span class="app-brand-text demo text-body fw-bolder">PT. PANORAMA VARIA CIPTA</span>
                         </a>
                     </div>
                     <!-- /Logo -->
-                    <h4 class="mb-2">Welcome to Sneat! 👋</h4>
-                    <p class="mb-4">Please sign-in to your account and start the adventure</p>
+                    <h4 class="mb-2">Welcome Back! 👋</h4>
+                    <br>
+                    {{-- <p class="mb-4">Please sign-in to your account and start the adventure</p> --}}
 
                     <form id="formAuthentication" method="POST" action="{{ route('login') }}">
                         @csrf
@@ -77,9 +78,7 @@
                         <div class="mb-3 form-password-toggle">
                             <div class="d-flex justify-content-between">
                                 <label class="form-label" for="password">Password</label>
-                                <a href="forgot-password-basic.html">
-                                    <small>Forgot Password?</small>
-                                </a>
+                                
                             </div>
                             <div class="input-group input-group-merge">
                                 <input type="password" id="password"
@@ -96,6 +95,10 @@
                                 <label class="form-check-label" for="remember-me">
                                     Remember Me
                                 </label>
+                                <br>
+                                <a href="#">
+                                    <small>Forgot Password?</small>
+                                </a>
                             </div>
                         </div>
                         <div class="mb-3">
@@ -103,12 +106,12 @@
                         </div>
                     </form>
 
-                    <p class="text-center">
+                    {{-- <p class="text-center">
                         <span>New on our platform?</span>
                         <a href="register-basic.html">
                             <span>Create an account</span>
                         </a>
-                    </p>
+                    </p> --}}
 
                     <div class="divider my-4">
                         <div class="divider-text">or</div>

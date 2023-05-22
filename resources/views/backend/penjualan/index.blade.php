@@ -11,46 +11,71 @@
                 style="margin-left: 70%;">Add</a>
         </div>
         <div class="container mt-4 ">
-            <table id="datatable" class="table table-striped ">
+            <table id="datatable" class="table table-striped bordered">
                 <thead>
                     <tr>
-                        <th>No</th>
-                        <th>COUNT MANAGER</th>
-                        <th>Kode DISTRIBUTOR</th>
-                        <th>DISTRIBUTOR</th>
-                        <th>AREA</th>
-                        <th>TOTAL PEMBELIAN</th>
-                        <th>TOTAL</th>
-                        <th>RETUR</th>
-                        <th>Actions</th>
+                        
+                        <th rowspan="2">COUNT MANAGER</th>
+                        <th rowspan="2">KODE DISTRIBUTOR</th>
+                        <th rowspan="2">DISTRIBUTOR</th>
+                        <th rowspan="2">AREA</th>
+                        <th colspan="12" style="text-align: center" >TOTAL PEMBELIAN</th>
+                        <th rowspan="2">TOTAL</th>
+                        <th rowspan="2">%</th>
+                        <th rowspan="2">RETUR</th>
+                        <th rowspan="2">Actions</th>
+                    </tr>
+                    <tr>
+                        <th>Jan</th>
+                        <th>Feb</th>
+                        <th>Mar</th>
+                        <th>Apr</th>
+                        <th>Mei</th>
+                        <th>Jun</th>
+                        <th>Jul</th>
+                        <th>Agu</th>
+                        <th>Sep</th>
+                        <th>Okt</th>
+                        <th>Nov</th>
+                        <th>Des</th>
                     </tr>
                 </thead>
                 <tbody>
                     @php
-                        $no = 1;
+                        $subtotal = 0;
                     @endphp
-                    @foreach ($data as $item)
+                    @foreach ($penjualan as $item)
                         <tr>
-                            <td>{{ $no++ }}</td>
-                            <td width="auto">Ngaing</td>
+                            {{-- <td>{{ $no++ }}</td> --}}
+                            <td width="auto">{{ $item->nama_cm }}</td>
                             <td width="auto">{{ $item->kode_distributor}}</td>
-                            <td width="auto">Sedul</td>
+                            <td width="auto">{{ $item->full_name}}</td>
                             <td width="auto">{{ $item->area}}</td>
-                            @if ($item->total_penjualan)
-                                    @php
-                                    $jsonData = json_decode($item->total_penjualan, true);
-                                    @endphp
-                                    <td width="auto"> {{ $jsonData['januari'] }}</td>
-                                    <td width="auto"> {{ $jsonData['februari'] }}</td>
-                                    <td width="auto"> {{ $jsonData['maret'] }}</td>
-                                    <td width="auto"> {{ $jsonData['april'] }}</td>
-                                    <td width="auto"> {{ $jsonData['mei'] }}</td>
-                            @else
-                            <td width="auto">-</td>
-                            <td width="auto">-</td>
-                            @endif
-                            <td width="auto">{{ $item->total}}</td>
-                            <td width="auto">{{ $item->retur}}</td>
+                            <td width="auto">{{ number_format($item->nilai1) ?? '-'}}</td>
+                            <td width="auto">{{ number_format($item->nilai2) ?? '-'}}</td>
+                            <td width="auto">{{ number_format($item->nilai3) ?? '-'}}</td>
+                            <td width="auto">{{ number_format($item->nilai4) ?? '-'}}</td>
+                            <td width="auto">{{ number_format($item->nilai5) ?? '-'}}</td>
+                            <td width="auto">{{ number_format($item->nilai6) ?? '-'}}</td>
+                            <td width="auto">{{ number_format($item->nilai7) ?? '-'}}</td>
+                            <td width="auto">{{ number_format($item->nilai8) ?? '-'}}</td>
+                            <td width="auto">{{ number_format($item->nilai9) ?? '-'}}</td>
+                            <td width="auto">{{ number_format($item->nilai10) ?? '-'}}</td>
+                            <td width="auto">{{ number_format($item->nilai11) ?? '-'}}</td>
+                            <td width="auto">{{ number_format($item->nilai12) ?? '-'}}</td>
+                            <td width="auto">{{ number_format($item->total)}}</td>
+                        
+                            <td width="auto">
+                                @php
+                                    $subtotal += $item->total ?? 0;
+                                @endphp
+                                @if($subtotal != 0)
+                                    {{ number_format(($item->total / $subtotal) * 100, 2) }}%
+                                @else
+                                    -
+                                @endif
+                            </td>
+                            <td width="auto">{{ $item->retur ?? '-'}}</td>
                             <td>
                                 <a href=""> <i class="far fa-eye badge-primary"></i></a>
                                 <a href=""> <i class="fas fa-edit badge-success"></i></a>
@@ -87,8 +112,16 @@
                                 </div>
                             </div>
                         </tr>
+                       
                     @endforeach
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="16" style="text-align: center"><b>TOTAL PEMBELIAN</b></td>
+                        <td>{{ number_format($subtotal) }}</td>
+                        
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </div>

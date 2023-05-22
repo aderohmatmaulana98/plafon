@@ -13,7 +13,18 @@ class Penjualan extends Model
     protected $fillable =[
 
         'distributor_id',
-        'total_pembelian',
+        'nilai1',
+        'nilai2',
+        'nilai3',
+        'nilai4',
+        'nilai5',
+        'nilai6',
+        'nilai7',
+        'nilai8',
+        'nilai9',
+        'nilai10',
+        'nilai11',
+        'nilai12',
         'total',
         'retur',
     ];
@@ -24,6 +35,6 @@ class Penjualan extends Model
 
     public function distributor()
     {
-        return $this->belongsTo(Distributor::class);
+        return $this->belongsTo(Distributor::class, 'distributor_id', 'id');
     }
 }
