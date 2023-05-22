@@ -23,6 +23,12 @@
         </div>
         <!-- /Search -->
 
+        <div class="container">
+            <h1>Jam Sekarang:</h1>
+            <p id="current-time"></p>
+          </div>
+          
+
         <ul class="navbar-nav flex-row align-items-center ms-auto">
             <!-- Language -->
 
@@ -38,7 +44,7 @@
             </li>
 
             <!-- Notification -->
-            <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
+            {{-- <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown"
                     data-bs-auto-close="outside" aria-expanded="false">
                     <i class="bx bx-cart bx-sm"></i>
@@ -54,7 +60,7 @@
                         </div>
                     </li>
                     <li class="dropdown-notifications-list scrollable-container">
-                        <ul class="list-group list-group-flush">
+                        <ul class="list-group list-group-flush"> --}}
                             {{-- @foreach (Helper::comment() as $co)
                                 <li class="list-group-item list-group-item-action dropdown-notifications-item">
                                     <div class="d-flex">
@@ -98,7 +104,7 @@
                                     </div>
                                 </li>
                             @endforeach --}}
-                        </ul>
+                        {{-- </ul>
                     </li>
                     <li class="dropdown-menu-footer border-top">
                         <a href="javascript:void(0);"
@@ -107,7 +113,7 @@
                         </a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
             <!--/ Notification -->
 
             <!-- User -->
@@ -115,7 +121,7 @@
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     
                         <div class="avatar avatar-online">
-                            <img src="{{ asset('assets/img/avatars/1.png') }}"
+                            <img src="{{ asset('assets/img/logo-pvc.png') }}"
                                 alt="" class="w-px-40 rounded-circle">
                         </div>
                    
@@ -206,3 +212,33 @@
 
 </nav>
 <!-- / Navbar -->
+
+<script>
+    // Fungsi untuk mendapatkan waktu saat ini dalam format hh:mm:ss
+    function getCurrentTime() {
+      var date = new Date();
+      var hours = date.getHours();
+      var minutes = date.getMinutes();
+      var seconds = date.getSeconds();
+  
+      // Tambahkan angka 0 di depan angka yang hanya satu digit
+      hours = hours < 10 ? "0" + hours : hours;
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
+  
+      return hours + ":" + minutes + ":" + seconds;
+    }
+  
+    // Fungsi untuk memperbarui elemen HTML dengan jam saat ini
+    function updateCurrentTime() {
+      var currentTimeElement = document.getElementById("current-time");
+      currentTimeElement.textContent = getCurrentTime();
+    }
+  
+    // Memperbarui jam setiap detik
+    setInterval(updateCurrentTime, 1000);
+  
+    // Memperbarui jam saat halaman dimuat
+    updateCurrentTime();
+  </script>
+  

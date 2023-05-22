@@ -1,7 +1,7 @@
 @extends('backend.layout.base')
 
 @section('content')
-    <div class="card table-responsive">
+    <div class="card table-responsive  shadow-sm">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="mb-0" style="font-size: 40px">
                 <b>{{ $title }}</b>
@@ -10,7 +10,7 @@
                 style="margin-left: 70%;">Add</a>
         </div>
         <div class="container mt-4 ">
-            <table id="datatable" class="table table-striped ">
+            <table id="datatable" class="table table-striped">
                 <thead>
                     <tr>
                         <th>No</th>

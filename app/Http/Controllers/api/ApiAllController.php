@@ -7,18 +7,23 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Pemesanan;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Http;
 
 class ApiAllController extends Controller
 {
     public function barang()
     {
-        $barang = DB::select('select * from barang');
+        $barang = DB::table('barang')
+        ->join('users','users.id','=','barang.user_id')
+        ->select('barang.*','users.id')
+        ->get();
         return response()->json([
             'success' => true,
             'message' => 'Data berhasil ditampilkan',
             'data' => $barang
         ]);
     }
+
 
     public function get_barang_by_id($id)
     {

@@ -32,6 +32,9 @@ Route::get('/', function () {
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'login_action'])->name('login.action');
 
+Route::get('/forgot-password', [AuthController::class, 'showForget'])->name('password.request');
+Route::post('/forgot-password', [AuthController::class, 'forgotPassword'])->name('password.email');
+
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 

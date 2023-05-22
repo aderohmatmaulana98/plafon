@@ -3,17 +3,22 @@
 <!-- Google Tag Manager (noscript) (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
 
 <!-- Content -->
-<div class="container-xxxl wrap-login100">
+<div class="container-xxxl" style="background-image: url('assets/img/bg-01.jpg');">
+    {{-- <div class="container-xxxl wrap-login100"> --}}
     <div class="authentication-wrapper authentication-basic container-p-y">
         <div class="authentication-inner">
             <!-- Register -->
             <div class="card">
-                <div class="card-body">
+                <div class="card-body ">
                     <!-- Logo -->
+                    <div class="text-center mb-2">
+                        <img src="{{ asset('assets/img/logo-pvc.png') }}" alt="" height="130" width="130">
+                    </div>
                     <div class="app-brand justify-content-center">
-                        <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1"
+                        {{-- <a href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1"
                             class="app-brand-link gap-2">
-                            <span class="app-brand-logo demo"><svg width="25" viewBox="0 0 25 42" version="1.1"
+                            <span class="app-brand-logo demo">
+                                <svg width="25" viewBox="0 0 25 42" version="1.1"
                                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                     <defs>
                                         <path
@@ -59,29 +64,30 @@
                                     </g>
                                 </svg>
                             </span>
-                            <span class="app-brand-text demo text-body fw-bolder">PT. PANORAMA VARIA CIPTA</span>
-                        </a>
+                        </a> --}}
+                        
+                        <span class="app-brand-text demo  fw-bolder">PT. PANORAMA VARIA CIPTA</span>
                     </div>
                     <!-- /Logo -->
-                    <h4 class="mb-2">Welcome Back! 👋</h4>
+                    <h4 class="mb-2"  style="color: black">Welcome Back! 👋</h4>
                     <br>
                     {{-- <p class="mb-4">Please sign-in to your account and start the adventure</p> --}}
 
                     <form id="formAuthentication" method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email or Username</label>
-                            <input type="text" class="form-control @error('email') is-invalid @enderror"
+                            <label for="email" class="form-label" style="color: black">Email or Username</label>
+                            <input type="text" style="color: black" class="form-control @error('email') is-invalid @enderror"
                                 value="{{ old('email') }}" required id="email" name="email"
                                 placeholder="Enter your email" autofocus>
                         </div>
-                        <div class="mb-3 form-password-toggle">
+                        <div class="mb-3 form-password-toggle" >
                             <div class="d-flex justify-content-between">
-                                <label class="form-label" for="password">Password</label>
+                                <label class="form-label" style="color: black" for="password">Password</label>
                                 
                             </div>
                             <div class="input-group input-group-merge">
-                                <input type="password" id="password"
+                                <input type="password" id="password" 
                                     class="form-control @error('password') is-invalid @enderror" name="password"
                                     placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                                     aria-describedby="password" />
@@ -92,7 +98,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="remember-me"
                                     {{ old('remember') ? 'checked' : '' }}>
-                                <label class="form-check-label" for="remember-me">
+                                <label class="form-check-label"  style="color: black" for="remember-me">
                                     Remember Me
                                 </label>
                                 <br>
@@ -101,19 +107,12 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <button class="btn btn-primary d-grid w-100">{{ __('Sign in') }}</button>
+                        <div class="col">
+                            <button class="col btn btn-dark-blue d-grid w-100" style="color: white">{{ __('Sign in') }}</button>
                         </div>
                     </form>
 
-                    {{-- <p class="text-center">
-                        <span>New on our platform?</span>
-                        <a href="register-basic.html">
-                            <span>Create an account</span>
-                        </a>
-                    </p> --}}
-
-                    <div class="divider my-4">
+                    {{-- <div class="divider my-4">
                         <div class="divider-text">or</div>
                     </div>
 
@@ -129,7 +128,7 @@
                         <a href="javascript:;" class="btn btn-icon btn-label-twitter">
                             <i class="tf-icons bx bxl-twitter"></i>
                         </a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <!-- /Register -->

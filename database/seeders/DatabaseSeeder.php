@@ -19,11 +19,11 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         DB::table('users')->insert([
-            'id' => 1,
-            'full_name' => 'Regita Kusuma',
-            'email' => 'regitakusuma@gmail.com',
+            'id' => 25641,
+            'full_name' => 'Bos',
+            'email' => 'bosku@gmail.com',
             'password' =>  Hash::make('12345678'),
-            'role_id' => 1,
+            'role_id' => 3,
             'is_active' => 'Y',
             'created_at' => now(),
         ]);

@@ -20,6 +20,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::post('/login', [ApiAuthController::class, 'login']);
+Route::post('/password/forgot', [ApiAuthController::class, 'forgotPassword']);
+Route::post('/password/reset', [ApiAuthController::class, 'resetPassword']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/me', [ApiAuthController::class, 'me']);
@@ -27,7 +29,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     //barang
     Route::get('/barang', [ApiAllController::class, 'barang']);
-    Route::get('/get_barang_by_id/{id}', [ApiAdminController::class, 'get_barang_by_id']);
+    Route::get('/get_barang_by_id/{id}', [ApiAllController::class, 'get_barang_by_id']);
 
     //distributor
     Route::get('/distributor', [ApiAllController::class, 'distributor']);

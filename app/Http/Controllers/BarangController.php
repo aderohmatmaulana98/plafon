@@ -8,14 +8,22 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Http;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class BarangController extends Controller
 {
     public function index()
     {
-        $data['title'] = "Barang";
-        $data['barang'] = DB::select('select * from barang');
+        $data['title'] = 'Kelola barang';
+        $token = session('access_token');
+        
+        $response = Http::withToken("$token")->get('http://plavon.dlhcode.com/api/barang');
+
+        $body = $response->getBody();
+        $data['barang'] = json_decode($body,true);
+        $data['barang'] = $data['barang']['data'];
+        
         return view('backend.barang.index', $data);
     }
     public function add()

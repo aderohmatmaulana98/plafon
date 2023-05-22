@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
@@ -35,6 +36,31 @@ class AuthController extends Controller
                 return redirect()->back();
             }
     }
+    public function showForget()
+    {
+        return view('backend.auth.forgot_password');
+    }
+
+    public function forgotPassword(Request $request)
+    {
+        $request->validate(['email' => 'required|email']);
+    
+        $response = $this->broker()->sendResetLink(
+            $request->only('email')
+        );
+    
+        if ($response === Password::RESET_LINK_SENT) {
+            return back()->with('status', 'Email reset password telah dikirim.');
+        }
+    
+        return back()->withErrors(['email' => 'Gagal mengirim email reset password.']);
+    }
+    
+    protected function broker()
+    {
+        return Password::broker();
+    }
+    
     public function logout(Request $request)
     {
         Auth::logout();

@@ -31,25 +31,25 @@
                     @foreach ($barang as $a)
                         <tr>
                             <td>{{ $no++ }}</td>
-                            <td width="auto">{{ $a->nama_barang }}</td>
-                            <td width="auto">{{ $a->stok }}</td>
-                            <td width="auto">{{ $a->ukuran }}</td>
-                            <td width="auto">{{ $a->jenis }}</td>
-                            <td width="auto">Rp. {{ number_format($a->harga) }}</td>
+                            <td width="auto">{{ $a['nama_barang'] }}</td>
+                            <td width="auto">{{ $a['stok'] }}</td>
+                            <td width="auto">{{ $a['ukuran'] }}</td>
+                            <td width="auto">{{ $a['jenis'] }}</td>
+                            <td width="auto">Rp. {{ number_format($a['harga']) }}</td>
                             <td style="width:
                                     auto"><img
-                                    src="{{ asset('storage/images/barang/' . $a->image . '') }}" alt=""
+                                    src="{{ asset('storage/images/barang/' . $a['image'] . '') }}" alt=""
                                     style="width: 55px;height: 45px;"></td>
                             <td style="width:
-                                    auto">{{ $a->created_at }}</td>
+                                    auto">{{ $a['created_at'] }}</td>
                             <td>
-                                <a href="/posts_/{{ $a->id }}" type="button" class="btn btn-primary"
+                                <a href="/posts_/{{ $a['id'] }}" type="button" class="btn btn-primary"
                                     target="_blank">Live</a>
-                                <a href="/barang/edit/{{ $a->id }}" type="button" class="btn btn-success">Edit</a>
+                                <a href="/barang/edit/{{ $a['id'] }}" type="button" class="btn btn-success">Edit</a>
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                    data-bs-target="#delete{{ $a->id }}">Delete</button>
+                                    data-bs-target="#delete{{ $a['id'] }}">Delete</button>
                             </td>
-                            <div class="modal fade" id="delete{{ $a->id }}" tabindex="-1" role="dialog"
+                            <div class="modal fade" id="delete{{ $a['id'] }}" tabindex="-1" role="dialog"
                                 aria-labelledby="deletemodal" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-dialog">
@@ -61,12 +61,12 @@
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <p>Anda yakin ingin menghapus {{ $a->nama_barang }}</p>
+                                                <p>Anda yakin ingin menghapus {{ $a['nama_barang'] }}</p>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-bs-dismiss="modal">Close</button>
-                                                <a href="{{ url('deleteBarang', $a->id) }} "
+                                                <a href="{{ url('deleteBarang', $a['id']) }} "
                                                     class="btn btn-primary">Hapus</a>
                                             </div>
                                         </div>

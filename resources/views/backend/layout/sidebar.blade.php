@@ -1,13 +1,13 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
 
     <!-- ! Hide app brand if navbar-full -->
-    <div class="app-brand demo">
-        <a href="/dashboard" class="app-brand-link">
-            <img src="{{ asset('') }}storage/images/logo/{{ Helper::apk()->logo }}" alt=""
-                style="width: 100%;">
-
+    <div class="text-center mt-2">
+        <a href="/dashboard">
+            <img src="{{ asset('assets/img/logo-pvc.png') }}" class="img-fluid" alt="Gambar" 
+                style="width: 50%; height:90%; "> 
         </a>
-
+    </div>
+    <div class="app-brand demo">
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
             <i class="bx bx-chevron-left bx-sm align-middle"></i>
         </a>
@@ -31,11 +31,6 @@
                     <li class="menu-item ">
                         <a href="/barang" class="menu-link">
                             <div>Kelola Barang</div>
-                        </a>
-                    </li>
-                    <li class="menu-item ">
-                        <a href="/role" class="menu-link">
-                            <div>Role Management</div>
                         </a>
                     </li>
                     <li class="menu-item ">
@@ -70,6 +65,12 @@
                         </a>
                     </li> --}}
                 </ul>
+            </li>
+            <li class="menu-item ">
+                <a href="/role" class="menu-link">
+                    <i class='menu-icon tf-icons bx bx-directions'></i>
+                    <div>Role Management</div>
+                </a>
             </li>
 
             <li class="menu-item ">
