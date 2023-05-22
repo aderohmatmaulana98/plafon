@@ -22,9 +22,7 @@ class ApiAllController extends Controller
 
     public function get_barang_by_id(Request $request)
     {
-        $barang = DB::table('barang')
-            ->where('id', $request->id)
-            ->get();
+        $barang = DB::select('select * from barang where id = '$request->id'');
 
         return response()->json([
             'success' => true,
