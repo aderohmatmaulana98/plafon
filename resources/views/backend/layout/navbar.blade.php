@@ -12,7 +12,7 @@
 
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
 
-        <!-- Search -->
+        {{-- <!-- Search -->
         <div class="navbar-nav align-items-center">
             <div class="nav-item navbar-search-wrapper mb-0">
                 <a class="nav-item nav-link search-toggler px-0" href="javascript:void(0);">
@@ -21,21 +21,18 @@
                 </a>
             </div>
         </div>
-        <!-- /Search -->
+        <!-- /Search --> --}}
 
-        <div class="container">
-            <h1>Jam Sekarang:</h1>
-            <p id="current-time"></p>
+        <div class="navbar-nav align-items-center">
+           <b><span class="d-none d-md-inline-block text-muted" id="current-time"></b></span>
           </div>
-          
+          <div class="navbar-nav">
+            <div class="px-2 "><marquee class="py-3">Selamat datang Admin di website Original Plavon PVC Premium PT. PANORAMA VARIA CIPTA</marquee></div>
+          </div>
 
         <ul class="navbar-nav flex-row align-items-center ms-auto">
             <!-- Language -->
-
-
             <!--/ Language -->
-
-
             <!-- Style Switcher -->
             <li class="nav-item me-2 me-xl-0">
                 <a class="nav-link style-switcher-toggle hide-arrow" href="javascript:void(0);">

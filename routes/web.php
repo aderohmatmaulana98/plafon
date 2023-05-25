@@ -99,6 +99,7 @@ Route::controller(PenjualanController::class)->group( function(){
     Route::get('penjualan','index')->name('penjualan');
     Route::get('/penjualan/add','add')->name('penjualan.add');
     Route::post('/addPenjualan','addPenjualan')->name('penjualan.addPenjualan');
+    Route::delete('/delete-penjualan/{id}', 'delete_penjualan')->name('delete.penjualan');
 });
 
 Route::controller(PemesananController::class)->group( function (){

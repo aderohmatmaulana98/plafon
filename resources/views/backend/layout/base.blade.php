@@ -62,7 +62,22 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/rtl/theme-default.css') }}"
         class="template-customizer-theme-css" />
     <link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}" />
-
+    <style>
+        /* Definisikan animasi dengan nama "moving" */
+        @keyframes moving {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(200px);
+          }
+        }
+      
+        /* Terapkan animasi ke elemen dengan class "moving-text" */
+        .moving-text {
+          animation: moving 2s infinite;
+        }
+      </style>
 
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/typeahead-js/typeahead.css') }}" />

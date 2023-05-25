@@ -8,6 +8,8 @@
                 <b>{{ $title }}</b>
             </h5>
             <a href="/penjualan/add" type="button" class="btn rounded-pill btn-primary justify-content-end"
+                style="margin-left: 50%;">Print</a>
+            <a href="/penjualan/add" type="button" class="btn rounded-pill btn-primary justify-content-end"
                 style="margin-left: 70%;">Add</a>
         </div>
         <div class="container mt-4 ">
@@ -80,9 +82,9 @@
                                 <a href=""> <i class="far fa-eye badge-primary"></i></a>
                                 <a href=""> <i class="fas fa-edit badge-success"></i></a>
                                 <i class="fas fa-trash badge-danger" data-bs-toggle="modal"
-                                    data-bs-target="#delete"></i> 
+                                    data-bs-target="#delete{{ $item->id }}"></i> 
                             </td>
-                            <div class="modal fade" id="delete" tabindex="-1" role="dialog"
+                            <div class="modal fade" id="delete{{ $item->id }}" tabindex="-1" role="dialog"
                                 aria-labelledby="deletemodal" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-dialog">
@@ -94,13 +96,12 @@
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <p>Anda yakin ingin menghapus </p>
+                                                <p>Anda yakin ingin menghapus {{ $item->full_name }} </p>
                                             </div>
                                             <div class="modal-footer">
-                                                <form action="" method="POST">
+                                                <form action="{{  route('delete.penjualan', $item->id)  }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    
                                                 <div class="px-5 pb-8 text-center">
                                                     <button type="button" data-bs-dismiss="modal" class="btn btn-outline-secondary">Cancel</button>
                                                     <button type="submit" class="btn btn-danger w-24">Delete</button>

@@ -31,14 +31,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/barang', [ApiAllController::class, 'barang']);
     Route::get('/get_barang_by_id/{id}', [ApiAllController::class, 'get_barang_by_id']);
 
-    //distributor
-    Route::get('/distributor', [ApiAllController::class, 'distributor']);
-    Route::get('/count_manager', [ApiAllController::class, 'count_manager']);
-    Route::get('/penjab', [ApiAllController::class, 'penjab']);
-    Route::get('/users', [ApiAllController::class, 'users']);
-    Route::post('/tambah_distributor',[ApiAllController::class,'tambah_distributor']);
-
     //pemesanan
     Route::get('/pemesanan',[ApiAllController::class, 'pemesanan']);
+    Route::post('/tambah_pemesanan',[ApiAllController::class, 'tambah_pemesanan']);
     Route::delete('/delete_pemesanan',[ApiAllController::class, 'delete_pemesanan']);
 });

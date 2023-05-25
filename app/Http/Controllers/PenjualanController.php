@@ -58,4 +58,15 @@ class PenjualanController extends Controller
     {
         
     }
+
+    public function delete_penjualan($id)
+    {
+        DB::table('penjualan')
+            ->where('id', $id)
+            ->delete();
+
+        Alert::success('Data Penjualan berhasil dihapus');
+        return redirect() 
+            ->route('penjualan');
+    }
 }
