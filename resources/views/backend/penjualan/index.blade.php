@@ -3,14 +3,15 @@
 @section('content')
 @include('sweetalert::alert')
     <div class="card table-responsive">
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0" style="font-size: 20px">
-                <b>{{ $title }}</b>
-            </h5>
-            <a href="/penjualan/add" type="button" class="btn rounded-pill btn-primary justify-content-end"
-                style="margin-left: 50%;">Print</a>
-            <a href="/penjualan/add" type="button" class="btn rounded-pill btn-primary justify-content-end"
-                style="margin-left: 70%;">Add</a>
+        <div class="card-header">
+            <div class="d-flex">
+                <h5 class="mb-4" style="font-size: 20px">
+                    <b>{{ $title }}</b>
+                </h5>
+            </div>
+               
+            <a href="/penjualan/add" type="button" class="btn rounded-pill btn-primary ml-2">Print</a>
+            <a href="/penjualan/add" type="button" class="btn rounded-pill btn-primary">Add</a>
         </div>
         <div class="container mt-4 ">
             <table id="datatable" class="table table-striped bordered">
@@ -25,7 +26,7 @@
                         <th rowspan="2">TOTAL</th>
                         <th rowspan="2">%</th>
                         <th rowspan="2">RETUR</th>
-                        <th rowspan="2">Actions</th>
+                        <th rowspan="2">Aksi</th>
                     </tr>
                     <tr>
                         <th>Jan</th>
@@ -78,11 +79,10 @@
                                 @endif
                             </td>
                             <td width="auto">{{ $item->retur ?? '-'}}</td>
-                            <td>
-                                <a href=""> <i class="far fa-eye badge-primary"></i></a>
-                                <a href=""> <i class="fas fa-edit badge-success"></i></a>
-                                <i class="fas fa-trash badge-danger" data-bs-toggle="modal"
-                                    data-bs-target="#delete{{ $item->id }}"></i> 
+                            <td class="">
+                                    <button class="btn btn-outline-primary btn-sm mb-2"><a href="/penjualan/edit/{{ $item->id }}"> <i class="fas fa-edit badge-success"></i></a></button>
+                                <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal"
+                                data-bs-target="#delete{{ $item->id }}"><i class="fas fa-trash badge-danger"></i></button> 
                             </td>
                             <div class="modal fade" id="delete{{ $item->id }}" tabindex="-1" role="dialog"
                                 aria-labelledby="deletemodal" aria-hidden="true">
@@ -90,7 +90,7 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="addNewDonaturLabel">Hapus Distributor
+                                                <h5 class="modal-title" id="addNewDonaturLabel">Hapus Data Penjualan
                                                 </h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
