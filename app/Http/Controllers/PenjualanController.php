@@ -7,6 +7,8 @@ use App\Models\Penjualan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\PenjualanExport;
 
 class PenjualanController extends Controller
 {
@@ -107,5 +109,20 @@ class PenjualanController extends Controller
         Alert::success('Data Penjualan berhasil dihapus');
         return redirect() 
             ->route('penjualan');
+    }
+
+    public function downloadExcel()
+    {
+        // Query data dari database
+        $penjualan = DB::table('penjualan')
+        ->join('distributor', 'distributor.id', '=' , 'penjualan.distributor_id')
+        ->join('count_manager', 'count_manager.id', '=', 'distributor.count_manager_id')
+        ->join('users','users.id','=','distributor.users_id')
+        ->select('penjualan.*', 'distributor.count_manager_id','distributor.kode_distributor',
+          'distributor.area','users.full_name','count_manager.nama_cm')
+        ->get();
+
+        // Export data ke file Excel
+        return Excel::download(new PenjualanExport($penjualan), 'rekap_data_penjualan.xlsx');
     }
 }

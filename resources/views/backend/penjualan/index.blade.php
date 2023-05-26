@@ -10,7 +10,7 @@
                 </h5>
             </div>
                
-            <a href="/penjualan/add" type="button" class="btn rounded-pill btn-primary ml-2">Print</a>
+            <a href="{{ route('export.download.excel') }}" type="button" class="btn rounded-pill btn-primary ml-2">Print</a>
             <a href="/penjualan/add" type="button" class="btn rounded-pill btn-primary">Add</a>
         </div>
         <div class="container mt-4 ">

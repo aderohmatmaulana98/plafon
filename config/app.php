@@ -183,6 +183,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,  
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
 
         /*
@@ -197,6 +198,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        
 
     ],
 
@@ -216,6 +218,7 @@ return [
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
         'Helper' => App\Providers\Helper::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
     ])->toArray(),
 

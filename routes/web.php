@@ -102,6 +102,7 @@ Route::controller(PenjualanController::class)->group( function(){
     Route::post('/addPenjualan','addPenjualan')->name('penjualan.addPenjualan');
     Route::post('/edit-penjualan/{id}','editPenjualan')->name('penjualan.editPenjualan');
     Route::delete('/delete-penjualan/{id}', 'delete_penjualan')->name('delete.penjualan');
+    Route::get('/export', 'downloadExcel')->name('export.download.excel');
 });
 
 Route::controller(PemesananController::class)->group( function (){
