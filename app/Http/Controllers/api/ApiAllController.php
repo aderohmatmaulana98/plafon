@@ -88,4 +88,18 @@ class ApiAllController extends Controller
             'data' => $pemesanan
         ]);
     }
+    public function get_pemesanan_by_id($id)
+    {
+        $get_pemesanan_by_id = DB::table('pemesanan')
+        ->join('barang','barang.id','=','pemesanan.id_barang')
+        ->join('users','users.id','=','pemesanan.id_user')
+        ->select('pemesanan.*','barang.nama_barang','barang.jenis','barang.harga','barang.ukuran')
+        ->where('users.id', '=', $id)
+        ->get();
+        return response()->json([
+            'success' => true,
+            'message' => 'Data berhasil ditampilkan',
+            'data' => $get_pemesanan_by_id
+        ]);
+    }
 }
