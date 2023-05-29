@@ -120,26 +120,25 @@ class DistributorController extends Controller
      
       DB::beginTransaction();
 
-      try {
-        // Hapus data dari table1 berdasarkan id
-        DB::table('distributor')->where('id', '=', $id)->delete();
-    
-        // Hapus data dari table2 berdasarkan id dan role_id
-        DB::table('users')->where([
-            ['id', '=', $id],
-            ['role_id', '=', 2],
-        ])->delete();
-    
-        DB::commit();
-        return true;
-      } catch (\Exception $e) {
-        DB::rollback();
-        return false;
-      }
+        try {
+            DB::table('users')
+                ->where('id', $id)
+                ->delete();
 
+            DB::table('distributor')
+                ->where('users_id', $id)
+                ->delete();
 
-      Alert::success('Data berhasil dihapus');
-      return redirect() 
-          ->route('distributor');
+            DB::commit();
+
+            return redirect()
+                ->route('distributor');
+                Alert::success('Data Distributor berhasil di Hapus');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()
+                ->route('distributor');
+                Alert::success('error', 'Gagal menghapus data.');
+        }
    }
 }
