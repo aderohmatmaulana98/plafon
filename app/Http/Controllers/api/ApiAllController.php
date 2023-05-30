@@ -52,17 +52,25 @@ class ApiAllController extends Controller
     public function tambah_pemesanan(Request $request)
     {
         $validate = $request->validate([
-            'id_pemesanan' => 'required',
+            'id_user' => 'required',
             'id_barang' => 'required',
             'jumlah' => 'required',
             'harga' => 'required',
             'status' => 'required',
             'order_id' => 'required',
         ]);
-
+        $id_barang = $request->id_barang;
+        $barang = DB::table('barang')
+        ->where('id', '=', 3)
+        ->select('barang.stok')
+        ->get();
+        $jumlah_pesanan = $request->jumlah;
+       
+        $pengurangan_stok = $barang[0]->stok - (int)$jumlah_pesanan;
+        
         $pemesanan = DB::table('pemesanan')->insert([
 
-                'id_pemesanan' => $request->id_pemesanan,
+                'id_user' => $request->id_user,
                 'id_barang' => $request->id_barang,
                 'jumlah' => $request->jumlah,
                 'harga' => $request->harga,
@@ -70,6 +78,10 @@ class ApiAllController extends Controller
                 'order_id' => $request->order_id,
                 'created_at' => now()
             ]);
+
+            $affected = DB::table('barang')
+            ->where('id', $id_barang)
+            ->update(['stok' => $pengurangan_stok]);
 
             return response()->json([
                 'success' => true,
