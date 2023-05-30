@@ -36,4 +36,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/get_pemesanan_by_id/{id}',[ApiAllController::class, 'get_pemesanan_by_id']);
     Route::post('/tambah_pemesanan',[ApiAllController::class, 'tambah_pemesanan']);
     Route::delete('/delete_pemesanan',[ApiAllController::class, 'delete_pemesanan']);
+    Route::post('/updateTransaksi', [ApiAllController::class, 'updateTransaksi']);
 });
