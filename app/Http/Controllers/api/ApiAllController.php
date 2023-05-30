@@ -123,4 +123,21 @@ class ApiAllController extends Controller
             'data' => $get_pemesanan_by_id
         ]);
     }
+    public function updateTransaksi(Request $request)
+    {
+        $order_id = $request->input('order_id');
+        $save = [
+            'status' => 'lunas'
+        ];
+
+        $updateTransaksi = DB::table('pemesanan')
+            ->where('order_id', $order_id)
+            ->update($save);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data berhasil diupdate',
+            'data' => $updateTransaksi
+        ], Response::HTTP_OK);
+    }
 }
