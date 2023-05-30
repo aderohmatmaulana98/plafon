@@ -62,11 +62,13 @@ class ApiAllController extends Controller
         $id_barang = $request->id_barang;
         $barang = DB::table('barang')
         ->where('id', '=', 3)
-        ->select('barang.stok')
+        ->select('barang.stok', 'barang.harga')
         ->get();
         $jumlah_pesanan = $request->jumlah;
        
         $pengurangan_stok = $barang[0]->stok - (int)$jumlah_pesanan;
+        $total_harga = (int)$jumlah_pesanan * $barang[0]->harga;
+        
         if ($pengurangan_stok < 0) {
             return response()->json([
                 'success' => true,
@@ -78,7 +80,7 @@ class ApiAllController extends Controller
 
                 'id_user' => $request->id_user,
                 'id_barang' => $request->id_barang,
-                'jumlah' => $request->jumlah,
+                'jumlah' => $total_harga,
                 'harga' => $request->harga,
                 'status' => $request->status,
                 'order_id' => $request->order_id,
