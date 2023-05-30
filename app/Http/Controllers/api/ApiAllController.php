@@ -67,6 +67,12 @@ class ApiAllController extends Controller
         $jumlah_pesanan = $request->jumlah;
        
         $pengurangan_stok = $barang[0]->stok - (int)$jumlah_pesanan;
+        if ($pengurangan_stok < 0) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Stok telah habis'
+            ], Response::HTTP_OK);
+        }else {
         
         $pemesanan = DB::table('pemesanan')->insert([
 
@@ -88,6 +94,7 @@ class ApiAllController extends Controller
                 'message' => 'Data Pemesanan berhasil ditambah',
                 'data' => $pemesanan
             ], Response::HTTP_OK);
+        }
     }
 
     public function delete_pemesanan($id)
