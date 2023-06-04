@@ -52,30 +52,51 @@ class ApiAllController extends Controller
     public function tambah_pemesanan(Request $request)
     {
         $validate = $request->validate([
-            'id_pemesanan' => 'required',
+            'id_user' => 'required',
             'id_barang' => 'required',
             'jumlah' => 'required',
             'harga' => 'required',
             'status' => 'required',
             'order_id' => 'required',
         ]);
-
+        $id_barang = $request->id_barang;
+        $barang = DB::table('barang')
+        ->where('id', '=', 3)
+        ->select('barang.stok', 'barang.harga')
+        ->get();
+        $jumlah_pesanan = $request->jumlah;
+       
+        $pengurangan_stok = $barang[0]->stok - (int)$jumlah_pesanan;
+        $total_harga = (int)$jumlah_pesanan * $barang[0]->harga;
+        
+        if ($pengurangan_stok < 0) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Stok telah habis'
+            ], Response::HTTP_OK);
+        }else {
+        
         $pemesanan = DB::table('pemesanan')->insert([
 
-                'id_pemesanan' => $request->id_pemesanan,
+                'id_user' => $request->id_user,
                 'id_barang' => $request->id_barang,
-                'jumlah' => $request->jumlah,
+                'jumlah' => $total_harga,
                 'harga' => $request->harga,
                 'status' => $request->status,
                 'order_id' => $request->order_id,
                 'created_at' => now()
             ]);
 
+            $affected = DB::table('barang')
+            ->where('id', $id_barang)
+            ->update(['stok' => $pengurangan_stok]);
+
             return response()->json([
                 'success' => true,
                 'message' => 'Data Pemesanan berhasil ditambah',
                 'data' => $pemesanan
             ], Response::HTTP_OK);
+        }
     }
 
     public function delete_pemesanan($id)
@@ -101,5 +122,22 @@ class ApiAllController extends Controller
             'message' => 'Data berhasil ditampilkan',
             'data' => $get_pemesanan_by_id
         ]);
+    }
+    public function updateTransaksi(Request $request)
+    {
+        $order_id = $request->input('order_id');
+        $save = [
+            'status' => 'lunas'
+        ];
+
+        $updateTransaksi = DB::table('pemesanan')
+            ->where('order_id', $order_id)
+            ->update($save);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data berhasil diupdate',
+            'data' => $updateTransaksi
+        ], Response::HTTP_OK);
     }
 }
