@@ -48,7 +48,7 @@
                             </td>
                             <td>
                                 <a href="{{ route('detail.distributor', $a->id) }}" <i class="far fa-eye badge-primary"></i></a>
-                                <a href="/cm/edit/{{ $a->id }}"> <i class="fas fa-edit badge-success"></i></a>
+                                {{-- <a href="/cm/edit/{{ $a->id }}"> <i class="fas fa-edit badge-success"></i></a> --}}
                                 <i class="fas fa-trash badge-danger" data-bs-toggle="modal"
                                     data-bs-target="#delete{{ $a->id }}"></i> 
                             </td>
@@ -67,10 +67,9 @@
                                                 <p>Anda yakin ingin menghapus {{ $a->full_name }}</p>
                                             </div>
                                             <div class="modal-footer">
-                                                <form action="{{  route('distributor.deleteDistributor', $a->id)  }}" method="POST">
+                                                <form action="deleteDistributor/{{ $a->id}}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    
                                                 <div class="px-5 pb-8 text-center">
                                                     <button type="button" data-bs-dismiss="modal" class="btn btn-outline-secondary">Cancel</button>
                                                     <button type="submit" class="btn btn-danger w-24">Delete</button>

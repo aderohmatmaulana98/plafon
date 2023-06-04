@@ -32,10 +32,14 @@ Route::get('/', function () {
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'login_action'])->name('login.action');
 
-Route::get('/forgot-password', [AuthController::class, 'showForget'])->name('password.request');
-Route::post('/forgot-password', [AuthController::class, 'forgotPassword'])->name('password.email');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
+
+Route::controller(DashboardController::class)->group( function (){
+    Route::get('/dashboard','index')->name('index');
+    Route::get('/rekap-penjualan','penjualan')->name('rekap.penjualan');
+    Route::get('/rekap-penjualan/export', 'downloadExcel')->name('export.excel');
+
+});
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
     //barang

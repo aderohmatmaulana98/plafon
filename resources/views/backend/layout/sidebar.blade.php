@@ -4,7 +4,7 @@
     <div class="text-center mt-2">
         <a href="/dashboard">
             <img src="{{ asset('assets/img/logo-pvc.png') }}" class="img-fluid" alt="Gambar" 
-                style="width: 50%; height:90%; "> 
+                style="width: 50%; height:100%; "> 
         </a>
     </div>
     <div class="app-brand demo">
@@ -14,7 +14,7 @@
     </div>
 
     <div class="menu-inner-shadow"></div>
-   
+        @if (request()->user()->role_id == 1)    
         <ul class="menu-inner py-1">
             <li class="menu-item">
                 <a href="/dashboard" class="menu-link ">
@@ -87,6 +87,22 @@
                 </ul>
             </li>
         </ul>
+        @elseif(request()->user()->role_id == 3)
+        <ul class="menu-inner py-1">
+            <li class="menu-item">
+                <a href="/dashboard" class="menu-link ">
+                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                    <div>Dashboards</div>
+                </a>
+            </li>
+            <li class="menu-item ">
+                <a href="/rekap-penjualan" class="menu-link">
+                    <i class='menu-icon tf-icons bx bx-directions'></i>
+                    <div>Rekap Penjualan</div>
+                </a>
+            </li>
+        </ul>
+        @endif
             
      
         {{-- <ul class="menu-inner py-1">

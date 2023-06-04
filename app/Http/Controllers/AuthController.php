@@ -29,36 +29,19 @@ class AuthController extends Controller
             $body = $response->getbody();
             $data = json_decode($body, true);
             
-            if(isset($data['data'])){
-                session(['access_token' => $data['data']]);
-                return redirect()->route('index');
-            }else{
-                return redirect()->back();
+            if (isset($data['data'])) {
+            if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+                $session = User::where('email', $request->email)->first();
+                // dd($session);
+                Session::put('name', $session->name);
+                $request->session()->regenerate();
             }
-    }
-    public function showForget()
-    {
-        return view('backend.auth.forgot_password');
-    }
 
-    public function forgotPassword(Request $request)
-    {
-        $request->validate(['email' => 'required|email']);
-    
-        $response = $this->broker()->sendResetLink(
-            $request->only('email')
-        );
-    
-        if ($response === Password::RESET_LINK_SENT) {
-            return back()->with('status', 'Email reset password telah dikirim.');
+            session(['access_token' => $data['data']]);
+            return redirect()->route('index');
+        } else {
+            return redirect()->back();
         }
-    
-        return back()->withErrors(['email' => 'Gagal mengirim email reset password.']);
-    }
-    
-    protected function broker()
-    {
-        return Password::broker();
     }
     
     public function logout(Request $request)

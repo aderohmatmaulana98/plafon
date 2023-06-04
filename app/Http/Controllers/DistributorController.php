@@ -21,7 +21,7 @@ class DistributorController extends Controller
          ->join('count_manager', 'count_manager.id', '=','distributor.count_manager_id')
          ->join('penjab','penjab.id','=','distributor.penjab_id')
          ->join('users','users.id','=','distributor.users_id')
-         ->select('distributor.id','distributor.kode_distributor','distributor.kontak','distributor.alamat','distributor.area','distributor.jumlah_agen',
+         ->select('users.id','distributor.kode_distributor','distributor.kontak','distributor.alamat','distributor.area','distributor.jumlah_agen',
          'count_manager.nama_cm', 'penjab.nama_penjab','users.full_name','users.email','users.password')
          ->where('users.role_id','=','2')
          ->get();
@@ -133,6 +133,7 @@ class DistributorController extends Controller
 
             return redirect()
                 ->route('distributor');
+
                 Alert::success('Data Distributor berhasil di Hapus');
         } catch (\Exception $e) {
             DB::rollback();
