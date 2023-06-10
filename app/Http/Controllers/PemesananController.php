@@ -11,8 +11,14 @@ class PemesananController extends Controller
     public function index()
     {
         $data['title'] = "Pemesanan";
-        $data['pemesanan'] = DB::select('select * from pemesanan');
-        return view('backend.distributor.pemesanan', $data);
+
+        $pemesanan = DB::table('pemesanan')
+        ->join('users','pemesanan.id_user','=','users.id')
+        ->join('barang','pemesanan.id_barang','=','barang.id')
+        ->select('pemesanan.*','barang.*', 'users.*')
+        ->get();
+
+        return view('backend.distributor.pemesanan', ['pemesanan' => $pemesanan], $data);
     }
     
 }

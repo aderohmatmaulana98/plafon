@@ -59,11 +59,11 @@
                             <div>Penjualan</div>
                         </a>
                     </li>
-                    {{-- <li class="menu-item ">
-                        <a href="/users" class="menu-link">
-                            <div>Users</div>
+                    <li class="menu-item ">
+                        <a href="/pemesanan" class="menu-link">
+                            <div>Pemesanan</div>
                         </a>
-                    </li> --}}
+                    </li>
                 </ul>
             </li>
             <li class="menu-item ">

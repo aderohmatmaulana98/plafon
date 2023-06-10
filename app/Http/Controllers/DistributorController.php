@@ -51,14 +51,15 @@ class DistributorController extends Controller
       $data['title'] = 'Detail Distributor';
 
       $distributor = DB::table('distributor')
-         ->join('count_manager', 'count_manager.id', '=', 'distributor.count_manager_id')
+         ->join('count_manager', 'distributor.count_manager_id', '=', 'count_manager.id')
          ->join('users', 'users.id', '=', 'distributor.users_id')
          ->join('penjab', 'penjab.id', '=', 'distributor.penjab_id')
-         ->select('users.full_name','users.email','users.password','count_manager.nama_cm','count_manager.id',
+         ->select('users.full_name','users.email','users.password','count_manager.nama_cm',
          'penjab.nama_penjab','distributor.*')
          ->where('distributor.id', '=', $id)
          ->where('users.role_id','=','2')
          ->get();
+         dd($distributor);
 
       return view('backend.distributor.detail_distributor', ['distributor'=> $distributor], $data);
    }

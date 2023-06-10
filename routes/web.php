@@ -33,7 +33,7 @@ Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'login_action'])->name('login.action');
 
 
-
+Route::middleware(['auth'])->group(function () {
 Route::controller(DashboardController::class)->group( function (){
     Route::get('/dashboard','index')->name('index');
     Route::get('/rekap-penjualan','penjualan')->name('rekap.penjualan');
@@ -112,7 +112,7 @@ Route::controller(PenjualanController::class)->group( function(){
 Route::controller(PemesananController::class)->group( function (){
     Route::get('/pemesanan','index')->name('pemesanan');
 });
-
+});
 
 Route::get('/route-cache', function () {
     Artisan::call('route:cache');

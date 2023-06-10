@@ -14,14 +14,11 @@ class DashboardController extends Controller
     public function index()
     {
         $data['title'] = 'Kelola Barang';
-        $data['barang'] = DB::select('select * from barang');
-        // $token = session('access_token');
-        // $response = Http::withToken("$token")->get('http://plavon.com/api/barang');
-
-        // $body = $response->getBody();
-        // $data['barang'] = json_decode($body,true);
-        // $data['barang'] = $data['barang']['data'];
-        return view('backend.dashboard.index', $data);
+        $pesananCount = DB::table('pemesanan')->where('status', 'lunas')->count();
+        $pesanan1Count = DB::table('pemesanan')->where('status', 'belum bayar')->count();
+        $totalLunas = DB::table('pemesanan')->where('status', 'lunas')->sum('harga');
+        
+        return view('backend.dashboard.index',compact('pesananCount','pesanan1Count','totalLunas'), $data);
     }
     public function detailBarang($id)
     {
