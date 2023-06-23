@@ -96,6 +96,18 @@
                 </a>
             </li>
             <li class="menu-item ">
+                <a href="/barang-bos" class="menu-link">
+                    <i class='menu-icon tf-icons bx bx-cart'></i>
+                    <div>Katalog Barang</div>
+                </a>
+            </li>
+            <li class="menu-item ">
+                <a href="/pemesanan" class="menu-link">
+                    <i class='menu-icon tf-icons bx bx-box'></i>
+                    <div>Pemesanan</div>
+                </a>
+            </li>
+            <li class="menu-item ">
                 <a href="/rekap-penjualan" class="menu-link">
                     <i class='menu-icon tf-icons bx bx-directions'></i>
                     <div>Rekap Penjualan</div>

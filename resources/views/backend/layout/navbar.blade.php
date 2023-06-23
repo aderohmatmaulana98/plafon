@@ -27,7 +27,7 @@
            <b><span class="d-none d-md-inline-block text-muted" id="current-time"></b></span>
           </div>
           <div class="navbar-nav">
-            <div class="px-2 "><marquee class="py-3">Selamat datang Admin di website Original Plavon PVC Premium PT. PANORAMA VARIA CIPTA</marquee></div>
+            <div class="px-2 "><marquee class="py-3">Selamat datang di website Original Plavon PVC Premium PT. PANORAMA VARIA CIPTA</marquee></div>
           </div>
 
         <ul class="navbar-nav flex-row align-items-center ms-auto">
@@ -159,7 +159,7 @@
                                         
                                     </span>
                                    
-                                        <small class="text-muted">Admin</small>
+                                        <small class="text-muted">{{ Auth::user()->full_name }}</small>
                                    
                                         {{-- <small class="text-muted">Anggota</small> --}}
                                    
@@ -173,16 +173,17 @@
                     </li>
                     <li>
                         <a class="dropdown-item"
-                            href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1/pages/profile-user">
+                            href="{{ route('profile') }}">
                             <i class="bx bx-user me-2"></i>
                             <span class="align-middle">My Profile</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item"
-                            href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1/app/invoice/list">
+                            {{-- href="https://demos.themeselection.com/sneat-bootstrap-html-laravel-admin-template/demo-1/app/invoice/list"> --}}
+                            href="{{ route('showchange.password') }}">
                             <i class="bx bx-credit-card me-2"></i>
-                            <span class="align-middle">Billing</span>
+                            <span class="align-middle">Ganti Password</span>
                         </a>
                     </li>
                     <li>

@@ -36,10 +36,13 @@ Route::post('login', [AuthController::class, 'login_action'])->name('login.actio
 Route::middleware(['auth'])->group(function () {
 Route::controller(DashboardController::class)->group( function (){
     Route::get('/dashboard','index')->name('index');
+    Route::get('/profile','profile')->name('profile');
     Route::get('/rekap-penjualan','penjualan')->name('rekap.penjualan');
     Route::get('/rekap-penjualan/export', 'downloadExcel')->name('export.excel');
 
 });
+Route::get('/change-password',[AuthController::class,'showchangePassword'])->name('showchange.password');
+Route::post('/change-password',[AuthController::class,'changePassword'])->name('change.password');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
     //barang
@@ -111,6 +114,7 @@ Route::controller(PenjualanController::class)->group( function(){
 
 Route::controller(PemesananController::class)->group( function (){
     Route::get('/pemesanan','index')->name('pemesanan');
+    Route::get('/barang-bos','showBarang')->name('barang-bos');
 });
 });
 

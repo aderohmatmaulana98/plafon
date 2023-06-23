@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\PenjualanExport;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Maatwebsite\Excel\Facades\Excel;
@@ -55,4 +56,13 @@ class DashboardController extends Controller
         // Export data ke file Excel
         return Excel::download(new PenjualanExport($penjualan), 'rekap_data_penjualan.xlsx');
     }
+
+    public function profile()
+        {   
+            $data['title'] = 'My Profile';
+
+            $user = Auth::user();
+
+            return view('backend.auth.profile', ['user' => $user], $data);
+        }
 }

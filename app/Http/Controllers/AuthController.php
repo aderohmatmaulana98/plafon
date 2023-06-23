@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Session;
 
@@ -42,6 +43,40 @@ class AuthController extends Controller
         } else {
             return redirect()->back();
         }
+    }
+
+    public function showchangePassword()
+    {   
+        $data['title'] = 'Ganti Password';
+
+        return view('backend.auth.change_password', $data);
+    }
+
+    public function changePassword(Request $request)
+    {
+        // Validasi input
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|string|min:8|confirmed',
+        ]);
+
+        // Mendapatkan data pengguna yang sedang terautentikasi
+        $user = Auth::user();
+
+        // Memeriksa apakah password saat ini sesuai
+        if (!Hash::check($request->current_password, $user->password)) {
+            return redirect()
+            ->route('showchange.password')
+            ->with('danger', 'Password saat ini tidak cocok.');
+        }
+
+        // Mengubah password pengguna
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+        
+        return redirect()
+            ->route('showchange.password')
+            ->with('success', 'Password berhasil diperbarui.');
     }
     
     public function logout(Request $request)
