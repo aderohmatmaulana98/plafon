@@ -43,8 +43,8 @@
                             <td style="width:
                                     auto">{{ $a['created_at'] }}</td>
                             <td>
-                                <a href="/posts_/{{ $a['id'] }}" type="button" class="btn btn-primary"
-                                    target="_blank">Live</a>
+                                {{-- <a href="/posts_/{{ $a['id'] }}" type="button" class="btn btn-primary"
+                                    target="_blank">Live</a> --}}
                                 <a href="/barang/edit/{{ $a['id'] }}" type="button" class="btn btn-success">Edit</a>
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                     data-bs-target="#delete{{ $a['id'] }}">Delete</button>

@@ -14,7 +14,6 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 class PenjualanExport implements FromCollection, WithHeadings, ShouldAutoSize, WithStyles
 {
     /**
-    * @return \Illuminate\Support\Collection
     */
     public function collection()
     {

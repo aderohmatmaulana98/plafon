@@ -72,32 +72,50 @@ class PenjualanController extends Controller
 
     public function editPenjualan(Request $request, $id)
     {
-         // Validasi request
-         $request->validate([
+            // Validasi request
+        $request->validate([
             'distributor_id' => 'required',
-           
+            'nilai1' => 'nullable|numeric',
+            'nilai2' => 'nullable|numeric',
+            'nilai3' => 'nullable|numeric',
+            'nilai4' => 'nullable|numeric',
+            'nilai5' => 'nullable|numeric',
+            'nilai6' => 'nullable|numeric',
+            'nilai7' => 'nullable|numeric',
+            'nilai8' => 'nullable|numeric',
+            'nilai9' => 'nullable|numeric',
+            'nilai10' => 'nullable|numeric',
+            'nilai11' => 'nullable|numeric',
+            'nilai12' => 'nullable|numeric',
+            
         ]);
 
-         // Cari item berdasarkan id
+        // Cari item penjualan berdasarkan id
         $penjualan = Penjualan::find($id);
 
-        // Jika item tidak ditemukan, kembalikan response error 404
+        // Jika item penjualan tidak ditemukan, kembalikan response error 404
         if (!$penjualan) {
             return response()->json([
                 'message' => 'Data not found'
             ], 404);
         }
 
-        // Update data count manager
+        // Update data penjualan
+        $input = $request->only(['distributor_id', 'nilai1', 'nilai2', 'nilai3', 'nilai4', 'nilai5', 'nilai6', 'nilai7', 'nilai8', 'nilai9', 'nilai10', 'nilai11', 'nilai12']);
 
-            $penjualan->distributor_id = $request->distributor_id;
-            $penjualan->updated_at = now();
+        // Hitung total dari nilai-nilai yang memiliki nilai numerik (tidak null)
+        $input['total'] = 0;
+        for ($i = 1; $i <= 12; $i++) {
+            if (isset($input['nilai'.$i]) && is_numeric($input['nilai'.$i])) {
+                $input['total'] += $input['nilai'.$i];
+            }
+        }
 
-            $penjualan->save();
+        // Update data penjualan dengan data baru
+        $penjualan->update($input);
 
         Alert::success('Data berhasil diedit');
-        return redirect()
-            ->route('penjualan');
+        return redirect()->route('penjualan');
     }
 
     public function delete_penjualan($id)

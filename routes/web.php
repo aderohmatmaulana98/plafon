@@ -74,15 +74,6 @@ Route::controller(PenjabController::class)->group( function (){
 });
 
 
-Route::controller(BulanController::class)->group( function (){
-    Route::get('/bulan','index')->name('bulan');
-    Route::get('/bulan/add','add')->name('bulan.add');
-    Route::get('/bulan/edit/{id}','edit')->name('bulan.edit');
-    Route::post('/addBulan','addBulan')->name('bulan.addBulan');
-    Route::post('/editBulan/{id}','editBulan')->name('bulan.editBulan');
-    Route::delete('/deleteBulan/{id}','deleteBulan')->name('bulan.deleteBulan');
-});
-
 Route::controller(CountManagerController::class)->group( function (){
     Route::get('/cm','index')->name('cm');
     Route::get('/cm/add','add')->name('cm.add');
@@ -114,6 +105,8 @@ Route::controller(PenjualanController::class)->group( function(){
 
 Route::controller(PemesananController::class)->group( function (){
     Route::get('/pemesanan','index')->name('pemesanan');
+    Route::get('/pemesanan/edit/{id}','edit')->name('pemesanan.edit');
+    Route::post('/editPemesanan/{id}','edit_pemesanan')->name('pemesanan.editPemesanan');
     Route::get('/barang-bos','showBarang')->name('barang-bos');
 });
 });

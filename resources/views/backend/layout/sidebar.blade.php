@@ -45,11 +45,6 @@
                     </li>
                     
                     <li class="menu-item ">
-                        <a href="/bulan" class="menu-link">
-                            <div>Kelola Bulan</div>
-                        </a>
-                    </li>
-                    <li class="menu-item ">
                         <a href="/cm" class="menu-link">
                             <div>Kelola Count Manager</div>
                         </a>
@@ -73,7 +68,7 @@
                 </a>
             </li>
 
-            <li class="menu-item ">
+            {{-- <li class="menu-item ">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class='menu-icon tf-icons bx bx-cog'></i>
                     <div>Setting</div>
@@ -85,7 +80,7 @@
                         </a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
         </ul>
         @elseif(request()->user()->role_id == 3)
         <ul class="menu-inner py-1">

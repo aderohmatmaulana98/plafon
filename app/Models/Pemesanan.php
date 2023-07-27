@@ -18,6 +18,8 @@ class Pemesanan extends Model
         'jumlah',
         'harga',
         'status',
+        'status',
+        'status_barang',
         'order',
     ];
 }
