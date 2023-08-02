@@ -1,6 +1,7 @@
 @extends('backend.layout.base')
 
 @section('content')
+<<<<<<< HEAD
     <div class="row">
         <div class="col-xl">
             <div class="card mb-4">
@@ -20,24 +21,42 @@
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
+=======
+<div class="row">
+    <div class="col-xl">
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0" style="font-size: 40px">{{ $title }}</h5>
+            </div>
+            <div class="card-body">
+                <form action="/addBarang" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label" for="nama_barang">Nama Barang</label>
+                                <input type="text" class="form-control" id="nama_barang" name="nama_barang"
+                                    placeholder="Masukan Nama Barang" required />
+>>>>>>> fdf13eabfbff9cb0a908d533a524d6fb249f405f
                             </div>
+                        </div>
 
-                            {{-- <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label" for="keyword">Category</label>
-                                    <select id="multicol-country" name="category_id" class="select2 form-select"
-                                        data-allow-clear="true">
-                                        <option selected="selected">
-                                            Pilih Category
-                                        </option>
-                                        @foreach ($category as $a)
-                                            <option value="{{ $a->id }}">
-                                                {{ $a->nama }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div> --}}
+                        {{-- <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label" for="keyword">Category</label>
+                                <select id="multicol-country" name="category_id" class="select2 form-select"
+                                    data-allow-clear="true">
+                                    <option selected="selected">
+                                        Pilih Category
+                                    </option>
+                                    @foreach ($category as $a)
+                                    <option value="{{ $a->id }}">
+                                        {{ $a->nama }}
+                                    </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div> --}}
 
                             <div class="col-md-6">
                                 <div class="mb-3">
@@ -93,22 +112,27 @@
                             <div class="col-md-12">
                                 <textarea name="deskripsi" id="editor1" cols="30" rows="10"></textarea>
                             </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label" for="keyword">Deskripsi</label>
+                            <textarea name="deskripsi" cols="100" rows="10" required></textarea>
+                        </div>
 
-                            <div class="col-md-12">
-                                <br>
-                                <button type="submit" class="btn btn-primary">Tambah</button>
-                                <a href="/barang" type="button" class="btn btn-success">Kembali</a>
-                            </div>
-                    </form>
-                </div>
+                        <div class="col-md-12">
+                            <br>
+                            <button type="submit" class="btn btn-primary">Tambah</button>
+                            <a href="/barang" type="button" class="btn btn-success">Kembali</a>
+                        </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
 
-    <script src="//cdn.ckeditor.com/4.20.1/full/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace('editor1', {
+<script src="//cdn.ckeditor.com/4.20.1/full/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('editor1', {
             height: '500',
             // Ensure that the Magic Line plugin, which is required for this sample, is loaded.
             extraPlugins: 'magicline',
@@ -144,5 +168,5 @@
             rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
             return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
         }
-    </script>
+</script>
 @endsection

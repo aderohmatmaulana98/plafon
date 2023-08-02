@@ -26,16 +26,22 @@
                                 <button type="submit" class="btn btn-primary">Tambah</button>
                                 <a href="/cm" type="button" class="btn btn-success">Kembali</a>
                             </div>
-                    </form>
-                </div>
+                        </div>
+                        <div class="col-md-12">
+                            <br>
+                            <button type="submit" class="btn btn-primary">Tambah</button>
+                            <a href="/cm" type="button" class="btn btn-success">Kembali</a>
+                        </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
 
-    {{-- <script src="//cdn.ckeditor.com/4.20.1/full/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace('editor1', {
+{{-- <script src="//cdn.ckeditor.com/4.20.1/full/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('editor1', {
             height: '500',
             // Ensure that the Magic Line plugin, which is required for this sample, is loaded.
             extraPlugins: 'magicline',
@@ -71,5 +77,5 @@
             rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
             return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
         }
-    </script> --}}
+</script> --}}
 @endsection
