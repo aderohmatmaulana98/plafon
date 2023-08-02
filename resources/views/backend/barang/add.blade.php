@@ -1,27 +1,6 @@
 @extends('backend.layout.base')
 
 @section('content')
-<<<<<<< HEAD
-    <div class="row">
-        <div class="col-xl">
-            <div class="card mb-4">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0" style="font-size: 40px">{{ $title }}</h5>
-                </div>
-                <div class="card-body">
-                    <form action="/addBarang" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label" for="nama_barang">Nama Barang</label>
-                                    <input type="text" class="form-control @error('nama_barang') is-invalid @enderror" value="{{ old('nama_barang') }}" id="nama_barang" name="nama_barang"
-                                        placeholder="Masukan Nama Barang"/>
-                                        @error('nama_barang')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-=======
 <div class="row">
     <div class="col-xl">
         <div class="card mb-4">
@@ -35,87 +14,75 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label" for="nama_barang">Nama Barang</label>
-                                <input type="text" class="form-control" id="nama_barang" name="nama_barang"
-                                    placeholder="Masukan Nama Barang" required />
->>>>>>> fdf13eabfbff9cb0a908d533a524d6fb249f405f
+                                <input type="text" class="form-control @error('nama_barang')  is-invalid @enderror" value="{{ old('nama_barang') }}" id="nama_cm" id="nama_barang" name="nama_barang"
+                                    placeholder="Masukan Nama Barang"/>
+                                    @error('nama_barang')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
 
-                        {{-- <div class="col-md-6">
+                        <div class="col-md-6">
                             <div class="mb-3">
-                                <label class="form-label" for="keyword">Category</label>
-                                <select id="multicol-country" name="category_id" class="select2 form-select"
-                                    data-allow-clear="true">
-                                    <option selected="selected">
-                                        Pilih Category
-                                    </option>
-                                    @foreach ($category as $a)
-                                    <option value="{{ $a->id }}">
-                                        {{ $a->nama }}
-                                    </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div> --}}
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label" for="jenis">Jenis</label>
-                                    <input type="text" class="form-control @error('jenis') is-invalid @enderror" value="{{ old('jenis') }}" id="jenis" name="jenis"
-                                        placeholder="Masukan Jenis" />
-                                        @error('jenis')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label" for="harga">Harga</label>
-                                    <input type="text" class="form-control @error('harga') is-invalid @enderror" value="{{ old('harga') }}" id="harga" name="harga"
-                                        placeholder="Masukan Harga" />
-                                        @error('harga')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label" for="ukuran">Ukuran</label>
-                                    <input type="text" class="form-control @error('ukuran') is-invalid @enderror" value="{{ old('ukuran') }}" id="ukuran" name="ukuran"
-                                        placeholder="Masukan Ukuran" />
-                                        @error('ukuran')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label" for="stok">Stok</label>
-                                    <input type="number" class="form-control @error('stok') is-invalid @enderror" value="{{ old('stok') }}" id="stok" name="stok"
-                                        placeholder="Masukan Jenis"
-                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" />
-                                        @error('stok')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label" for="keyword">Image</label>
-                                    <input type="file" class="form-control @error('image') is-invalid @enderror" value="{{ old('image') }}" id="image" name="image"
-                                        placeholder="Thumbnail" />
-                                        @error('image')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <textarea name="deskripsi" id="editor1" cols="30" rows="10"></textarea>
+                                <label class="form-label" for="jenis">Jenis</label>
+                                <input type="text" class="form-control @error('jenis')  is-invalid @enderror" value="{{ old('jenis') }}" id="jenis" name="jenis"
+                                    placeholder="Masukan Jenis"/>
+                                    @error('jenis')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <label class="form-label" for="keyword">Deskripsi</label>
-                            <textarea name="deskripsi" cols="100" rows="10" required></textarea>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label" for="harga">Harga</label>
+                                <input type="text" class="form-control @error('harga')  is-invalid @enderror" value="{{ old('harga') }}" id="harga" name="harga"
+                                    placeholder="Masukan Harga"/>
+                                    @error('harga')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label" for="ukuran">Ukuran</label>
+                                <input type="text" class="form-control  @error('ukuran')  is-invalid @enderror" value="{{ old('ukuran') }}" id="ukuran" name="ukuran"
+                                    placeholder="Masukan Ukuran" />
+                                    @error('ukuran')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label" for="stok">Stok</label>
+                                <input type="number" class="form-control @error('stok')  is-invalid @enderror" value="{{ old('stok') }}" id="stok" name="stok"
+                                    placeholder="Masukan Jenis"
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
+                                    />
+                                    @error('stok')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label" for="image">Image</label>
+                                <input type="file" class="form-control  @error('image')  is-invalid @enderror" value="{{ old('image') }}" id="image" name="image" placeholder="Thumbnail"
+                                    />
+                                    @error('image')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label" for="deskripsi">Deskripsi</label>
+                                <input type="text" class="form-control @error('deskripsi')  is-invalid @enderror" value="{{ old('deskripsi') }}" id="deskripsi" name="deskripsi"
+                                    placeholder="Masukan Deskripsi"/>
+                                    @error('deskripsi')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
 
                         <div class="col-md-12">

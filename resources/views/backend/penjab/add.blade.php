@@ -27,11 +27,7 @@
                                 <a href="/penjab" type="button" class="btn btn-success">Kembali</a>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <br>
-                            <button type="submit" class="btn btn-primary">Tambah</button>
-                            <a href="/penjab" type="button" class="btn btn-success">Kembali</a>
-                        </div>
+                        
                 </form>
             </div>
         </div>
