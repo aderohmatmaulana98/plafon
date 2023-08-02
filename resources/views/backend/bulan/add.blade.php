@@ -1,38 +1,38 @@
 @extends('backend.layout.base')
 
 @section('content')
-    <div class="row">
-        <div class="col-xl">
-            <div class="card mb-4">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0" style="font-size: 40px">{{ $title }}</h5>
-                </div>
-                <div class="card-body">
-                    <form action="/addBulan" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label" for="nama_bulan">Nama Bulan</label>
-                                    <input type="text" class="form-control" id="nama_bulan" name="nama_bulan"
-                                        placeholder="Masukan Nama Bulan" />
-                                </div>
-                            </div>                            
-                            <div class="col-md-12">
-                                <br>
-                                <button type="submit" class="btn btn-primary">Tambah</button>
-                                <a href="/bulan" type="button" class="btn btn-success">Kembali</a>
+<div class="row">
+    <div class="col-xl">
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0" style="font-size: 40px">{{ $title }}</h5>
+            </div>
+            <div class="card-body">
+                <form action="/addBulan" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label" for="nama_bulan">Nama Bulan</label>
+                                <input type="text" class="form-control" id="nama_bulan" name="nama_bulan"
+                                    placeholder="Masukan Nama Bulan" required />
                             </div>
-                    </form>
-                </div>
+                        </div>
+                        <div class="col-md-12">
+                            <br>
+                            <button type="submit" class="btn btn-primary">Tambah</button>
+                            <a href="/bulan" type="button" class="btn btn-success">Kembali</a>
+                        </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
 
-    {{-- <script src="//cdn.ckeditor.com/4.20.1/full/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace('editor1', {
+{{-- <script src="//cdn.ckeditor.com/4.20.1/full/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('editor1', {
             height: '500',
             // Ensure that the Magic Line plugin, which is required for this sample, is loaded.
             extraPlugins: 'magicline',
@@ -68,5 +68,5 @@
             rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
             return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
         }
-    </script> --}}
+</script> --}}
 @endsection
