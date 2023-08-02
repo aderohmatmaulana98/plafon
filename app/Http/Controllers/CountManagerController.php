@@ -31,6 +31,12 @@ class CountManagerController extends Controller
 
     public function addCM(Request $request)
     {
+        $request->validate(
+
+            [  
+                'nama_cm' => 'required',
+            ]);
+
         DB::table('count_manager')->insert([
             'nama_cm' => $request->nama_cm,
             'created_at' => now(),

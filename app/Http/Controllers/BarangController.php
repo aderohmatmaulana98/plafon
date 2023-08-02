@@ -39,6 +39,17 @@ class BarangController extends Controller
     }
     public function addBarang(Request $request)
     {
+            // validasi input
+        $request->validate([
+            'nama_barang' => 'required',
+            'user_id' => 'required',
+            'jenis' => 'required',
+            'stok' => 'required',
+            'harga' => 'required',
+            'ukuran' => 'required',
+            'deskripsi' => 'required',
+        ]);
+
         try {
 
             if ($request->has('image') == null) {

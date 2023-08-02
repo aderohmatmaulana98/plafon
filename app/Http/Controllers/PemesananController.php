@@ -57,4 +57,18 @@ class PemesananController extends Controller
         Alert::success('Data berhasil diedit');
         return redirect()->route('pemesanan');
     }
+
+    public function showBarang()
+    {
+        $data['title'] = 'Katalog barang';
+        $token = session('access_token');
+
+        $response = Http::withToken("$token")->get('http://plavon.dlhcode.com/api/barang');
+
+        $body = $response->getBody();
+        $data['barang'] = json_decode($body,true);
+        $data['barang'] = $data['barang']['data'];
+
+        return view('backend.bos.barang',$data);
+    }
 }

@@ -60,26 +60,27 @@ class DistributorController extends Controller
          ->get();
         //  dd($distributor);
 
-      return view('backend.distributor.detail_distributor', ['distributor'=> $distributor], $data);
-   }
+    return view('backend.distributor.detail_distributor', ['distributor'=> $distributor], $data);
+}
 
-   public function addDistributor(Request $request)
-   {
-      $request->validate(
+public function addDistributor(Request $request)
+{
+    $request->validate(
 
-         [  
+        [  
             'full_name' => 'required',
             'email' => 'required|unique:users,email',
             'password' => 'reqired',
-         ],
-         [
-             'count_manager_id' => 'required',
-             'kode_distributor' => 'required',
-             'penjab_id' => 'required',
-         ]
-      );
+            'count_manager_id' => 'required',
+            'kode_distributor' => 'required',
+            'penjab_id' => 'required',
+            'alamat' => 'required',
+            'area' => 'required',
+            'jumlah_agen' => 'required',
+            'kontak' => 'required',
+        ]);
 
-      $id_user = rand(000000, 999999);
+    $id_user = rand(000000, 999999);
         $user = [
             'id' =>  $id_user,
             'full_name' => $request->full_name,

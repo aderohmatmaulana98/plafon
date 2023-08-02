@@ -14,8 +14,11 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label" for="nama_cm">Nama Count Manager</label>
-                                    <input type="text" class="form-control" id="nama_cm" name="nama_cm"
+                                    <input type="text" class="form-control @error('nama_cm')  is-invalid @enderror" id="nama_cm" name="nama_cm"
                                         placeholder="Masukan Nama Count Manager" />
+                                        @error('nama_cm')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>                            
                             <div class="col-md-12">

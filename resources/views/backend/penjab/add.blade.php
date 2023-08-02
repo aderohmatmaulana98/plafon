@@ -14,8 +14,11 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label" for="nama_penjab">Nama Penanggung Jawab</label>
-                                    <input type="text" class="form-control" id="nama_penjab" name="nama_penjab"
+                                    <input type="text" class="form-control @error('nama_penjab')  is-invalid @enderror"  id="nama_penjab" name="nama_penjab"
                                         placeholder="Masukan Nama Penanggung Jawab" />
+                                        @error('nama_penjab')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>                            
                             <div class="col-md-12">

@@ -14,34 +14,19 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label" for="kode_distributor">Kode Distributor</label>
-                                    <input type="number" class="form-control" id="kode_distributor" name="kode_distributor"
-                                        placeholder="Masukan kode distributor" />
+                                    <input type="number" class="form-control @error('kode_distributor') is-invalid @enderror" value="{{ old('kode_distributor') }}" id="kode_distributor" name="kode_distributor"
+                                    value="" placeholder="Masukan kode distributor" />
+                                        @error('kode_distributor')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             
-
-                            {{-- <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label" for="keyword">Category</label>
-                                    <select id="multicol-country" name="category_id" class="select2 form-select"
-                                        data-allow-clear="true">
-                                        <option selected="selected">
-                                            Pilih Category
-                                        </option>
-                                        @foreach ($category as $a)
-                                            <option value="{{ $a->id }}">
-                                                {{ $a->nama }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div> --}}
-
                             <div class="col-md-6">
                                 <label class="form-label" for="jenis">Count Manager</label>
                                 <select class="form-select form-select" aria-label=".form-select-sm example" name="count_manager_id" id="count_manager_id">
                                 <option selected>-Pilih Count Manager-</option>
-                                         @foreach($cm as $c)
+                                    @foreach($cm as $c)
                                         <option value="{{ $c->id }}" >{{ $c->nama_cm }}</option>
                                         @endforeach
                                 </select>
@@ -49,8 +34,11 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label" for="full_name">Nama Distributor</label>
-                                    <input type="text" class="form-control" id="full_name"  name="full_name"
-                                       value="" placeholder="Masukan Nama Distributor" />
+                                    <input type="text" class="form-control @error('full_name') is-invalid @enderror" value="{{ old('full_name') }}" id="full_name"  name="full_name"
+                                    value="" placeholder="Masukan Nama Distributor" />
+                                    @error('full_name')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -58,7 +46,7 @@
                                     <label class="form-label" for="penjab_id">Penanggung Jawab</label>
                                     <select class="form-select form-select" aria-label=".form-select-sm example" name="penjab_id" id="penjab_id">
                                         <option selected>-Pilih Penanggung Jawab-</option>
-                                                 @foreach($penjab as $pj)
+                                                @foreach($penjab as $pj)
                                                 <option value="{{ $pj->id }}" >{{ $pj->nama_penjab }}</option>
                                                 @endforeach
                                         </select>
@@ -67,36 +55,51 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label" for="email">Email</label>
-                                    <input type="email" class="form-control" id="email" name="email"
+                                    <input type="email" class="form-control @error('email')  is-invalid @enderror" value="{{ old('email') }}" id="email" name="email"
                                         placeholder="Masukan Email">
+                                        @error('email')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label" for="kontak">Kontak/No HP</label>
-                                    <input type="number" class="form-control" id="kontak" name="kontak"
+                                    <input type="number" class="form-control @error('kontak')  is-invalid @enderror" value="{{ old('kontak') }}" id="kontak" name="kontak"
                                         placeholder="Masukan No Hp">
+                                        @error('kontak')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label" for="alamat">Alamat</label>
-                                    <textarea type="text" class="form-control" id="alamat" name="alamat"
-                                        placeholder="Masukan alamat"> </textarea>
+                                    <input type="text" class="form-control @error('alamat')  is-invalid @enderror" value="{{ old('alamat') }}" id="alamat" name="alamat"
+                                        placeholder="Masukan alamat"> </input>
+                                        @error('alamat')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label" for="area">Area Cover</label>
-                                    <input type="text" class="form-control" id="area" name="area"
+                                    <input type="text" class="form-control @error('area')  is-invalid @enderror" value="{{ old('area') }}" id="area" name="area"
                                         placeholder="Masukan area">
+                                        @error('area')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label" for="jumlah_agen">Jumlah Agen / Distributor</label>
-                                    <input type="text" class="form-control" id="jumlah_agen" name="jumlah_agen"
+                                    <input type="text" class="form-control @error('jumlah_agen')  is-invalid @enderror" value="{{ old('jumlah_agen') }}" id="jumlah_agen" name="jumlah_agen"
                                         placeholder="Masukan Jumlah agen">
+                                        @error('jumlah_agen')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-12">

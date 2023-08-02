@@ -31,6 +31,12 @@ class PenjabController extends Controller
 
     public function addPenjab(Request $request)
     {
+        $request->validate(
+
+            [  
+                'nama_penjab' => 'required',
+            ]);
+
         DB::table('penjab')->insert([
             'nama_penjab' => $request->nama_penjab,
             'created_at' => now(),
