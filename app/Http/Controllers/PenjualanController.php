@@ -14,19 +14,28 @@ class PenjualanController extends Controller
 {
     public function index()
     {
-        $title['title'] = "Penjualan";
+        $title= "Penjualan";
 
-        $penjualan = DB::table('penjualan')
-        ->join('distributor', 'distributor.id', '=' , 'penjualan.distributor_id')
-        ->join('count_manager', 'count_manager.id', '=', 'distributor.count_manager_id')
-        ->join('users','users.id','=','distributor.users_id')
-        ->select('penjualan.*', 'distributor.count_manager_id','distributor.kode_distributor',
-          'distributor.area','users.full_name','count_manager.nama_cm')
+        $penjualan = DB::table('pemesanan')
+        ->join('users','users.id', '=', 'pemesanan.id_user')
+        ->join('distributor','users.id', '=', 'distributor.users_id')
+        ->join('count_manager','count_manager.id', '=', 'distributor.count_manager_id')
+        ->where(DB::raw("DATE_FORMAT(pemesanan.created_at, '%Y-%m')"), '=', '2023-11')
+        ->where('status', 'lunas')
+        ->groupBy('users.id')
+        ->select('count_manager.nama_cm','users.full_name','distributor.area','distributor.kode_distributor', DB::raw('SUM(harga) as jumlah_harga'))
         ->get();
-
-        //dd($penjualan);
-
-        return view('backend.penjualan.index', ['penjualan' => $penjualan] , $title);
+        $total_penjualan = DB::table('pemesanan')
+        ->join('users','users.id', '=', 'pemesanan.id_user')
+        ->join('distributor','users.id', '=', 'distributor.users_id')
+        ->join('count_manager','count_manager.id', '=', 'distributor.count_manager_id')
+        ->where(DB::raw("DATE_FORMAT(pemesanan.created_at, '%Y-%m')"), '=', '2023-11')
+        ->where('status', 'lunas')
+        ->select( DB::raw('SUM(harga) as jumlah_harga'))
+        ->first();
+        $total_penjualan = $total_penjualan->jumlah_harga;
+      
+        return view('backend.penjualan.index', compact('title', 'penjualan', 'total_penjualan'));
     }
 
     public function add()
@@ -37,14 +46,26 @@ class PenjualanController extends Controller
         ->select('distributor.id','distributor.count_manager_id','distributor.kode_distributor',
           'distributor.area','users.full_name')
         ->get();
+        
         return view('backend.penjualan.add',['distributor' => $data1], $data);
     }
 
     public function addPenjualan(Request $request)
     {
-        $validatedData = $request->validate([
-            'distributor_id' => 'required',
-        ]);
+       
+
+        $penjualan = DB::table('pemesanan')
+        ->join('users','users.id', '=', 'pemesanan.id_user')
+        ->join('distributor','users.id', '=', 'distributor.users_id')
+        ->join('count_manager','count_manager.id', '=', 'distributor.count_manager_id')
+        ->where(DB::raw("DATE_FORMAT(pemesanan.created_at, '%Y-%m')"), '=', '2023-11')
+        ->where('status', 'lunas')
+        ->groupBy('users.id')
+        ->select('count_manager.nama_cm','users.full_name', DB::raw('SUM(harga) as jumlah_harga'))
+        ->get();
+        // $distributorJanuari = DB::table('distributor')
+        //                         ->join('users', 'users.id', '=', 'distributor.id_user')
+        //                         ->where('distributor.id_user', '')
 
         $input = $request->only(['distributor_id', 'nilai1', 'nilai2', 'nilai3', 'nilai4', 'nilai5', 'nilai6', 'nilai7', 'nilai8', 'nilai9', 'nilai10', 'nilai11', 'nilai12']);
         $input['total'] = array_sum($input);

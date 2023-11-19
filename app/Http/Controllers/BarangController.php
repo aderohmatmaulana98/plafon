@@ -48,6 +48,7 @@ class BarangController extends Controller
             'harga' => 'required',
             'ukuran' => 'required',
             'deskripsi' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
         try {

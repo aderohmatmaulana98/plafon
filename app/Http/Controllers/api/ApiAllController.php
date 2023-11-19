@@ -142,6 +142,7 @@ class ApiAllController extends Controller
                 'jumlah' => $request->jumlah,
                 'harga' => $request->harga,
                 'status' => $request->status,
+                'status_barang' => 'menunggu',
                 'order_id' => $request->order_id,
                 'redirect_url' => $request->redirect_url,
                 'created_at' => now()
@@ -182,7 +183,8 @@ class ApiAllController extends Controller
     {
         $order_id = $request->input('order_id');
         $save = [
-            'status' => 'lunas'
+            'status' => 'lunas',
+            'status_barang' => 'proses'
         ];
 
         $updateTransaksi = DB::table('pemesanan')
