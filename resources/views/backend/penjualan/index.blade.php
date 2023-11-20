@@ -2,14 +2,42 @@
 
 @section('content')
 @include('sweetalert::alert')
+
+    <div class="card table-responsive my-2">
+        <div class="card-header">
+            <div class="d-flex">
+                <h5 class="mb-4" style="font-size: 20px">
+                    <b>Ekspor to Excel</b>
+                </h5>
+            </div> 
+
+            <form action="{{ route('export.download.excel') }}" method="GET" class="form-inline">
+                <label for="filter_month" class="mr-2">Filter:</label>
+                <input type="month" name="filter_month" id="filter_month" class="form-control mr-2" value="{{ $selectedMonth }}">
+                <button type="submit" class="btn rounded-pill btn-primary mt-4">Print</button>
+            </form>
+        </div>
+    </div>
+
     <div class="card table-responsive">
         <div class="card-header">
             <div class="d-flex">
                 <h5 class="mb-4" style="font-size: 20px">
                     <b>{{ $title }}</b>
                 </h5>
-            </div>               
-       
+            </div>  
+            <form action="{{ route('penjualan') }}" method="GET" class="form-inline">
+                <label for="filter_month" class="mr-2">Filter:</label>
+                <select name="filter_month" id="filter_month" class="form-control mr-2">
+                    <option value="all" {{ $selectedMonth == 'all' ? 'selected' : '' }}>All</option>
+                    @foreach ($availableMonths as $month)
+                        <option value="{{ $month }}" {{ $selectedMonth == $month ? 'selected' : '' }}>
+                            {{ date('F Y', strtotime($month)) }}
+                        </option>
+                    @endforeach
+                </select>
+                <button type="submit" class="btn rounded-pill btn-primary mt-2">Apply Filter</button>
+            </form>           
         </div>
         <div class="container mt-4 ">
             <table id="datatable" class="table table-striped bordered">

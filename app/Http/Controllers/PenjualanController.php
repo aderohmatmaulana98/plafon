@@ -12,30 +12,54 @@ use App\Exports\PenjualanExport;
 
 class PenjualanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $title= "Penjualan";
+        $title = "Penjualan";
 
-        $penjualan = DB::table('pemesanan')
-        ->join('users','users.id', '=', 'pemesanan.id_user')
-        ->join('distributor','users.id', '=', 'distributor.users_id')
-        ->join('count_manager','count_manager.id', '=', 'distributor.count_manager_id')
-        ->where(DB::raw("DATE_FORMAT(pemesanan.created_at, '%Y-%m')"), '=', '2023-11')
+    // Filter default untuk bulan dan tahun saat ini
+    $filterMonth = $request->input('filter_month', 'all');
+
+    $penjualanQuery = DB::table('pemesanan')
+        ->join('users', 'users.id', '=', 'pemesanan.id_user')
+        ->join('distributor', 'users.id', '=', 'distributor.users_id')
+        ->join('count_manager', 'count_manager.id', '=', 'distributor.count_manager_id')
         ->where('status', 'lunas')
-        ->groupBy('users.id')
-        ->select('count_manager.nama_cm','users.full_name','distributor.area','distributor.kode_distributor', DB::raw('SUM(harga) as jumlah_harga'))
+        ->groupBy('users.id');
+
+    // Gunakan kondisi tambahan jika filter bukan "All"
+    if ($filterMonth != 'all') {
+        $penjualanQuery->where(DB::raw("DATE_FORMAT(pemesanan.created_at, '%Y-%m')"), '=', $filterMonth);
+    }
+
+    $penjualan = $penjualanQuery
+        ->select('count_manager.nama_cm', 'users.full_name', 'distributor.area', 'distributor.kode_distributor', DB::raw('SUM(harga) as jumlah_harga'))
         ->get();
-        $total_penjualan = DB::table('pemesanan')
-        ->join('users','users.id', '=', 'pemesanan.id_user')
-        ->join('distributor','users.id', '=', 'distributor.users_id')
-        ->join('count_manager','count_manager.id', '=', 'distributor.count_manager_id')
-        ->where(DB::raw("DATE_FORMAT(pemesanan.created_at, '%Y-%m')"), '=', '2023-11')
-        ->where('status', 'lunas')
-        ->select( DB::raw('SUM(harga) as jumlah_harga'))
+
+    $total_penjualanQuery = DB::table('pemesanan')
+        ->join('users', 'users.id', '=', 'pemesanan.id_user')
+        ->join('distributor', 'users.id', '=', 'distributor.users_id')
+        ->join('count_manager', 'count_manager.id', '=', 'distributor.count_manager_id')
+        ->where('status', 'lunas');
+
+    // Gunakan kondisi tambahan jika filter bukan "All"
+    if ($filterMonth != 'all') {
+        $total_penjualanQuery->where(DB::raw("DATE_FORMAT(pemesanan.created_at, '%Y-%m')"), '=', $filterMonth);
+    }
+
+    $total_penjualan = $total_penjualanQuery
+        ->select(DB::raw('SUM(harga) as jumlah_harga'))
         ->first();
-        $total_penjualan = $total_penjualan->jumlah_harga;
-      
-        return view('backend.penjualan.index', compact('title', 'penjualan', 'total_penjualan'));
+    $total_penjualan = $total_penjualan->jumlah_harga;
+
+    // Dapatkan bulan dan tahun yang tersedia untuk dropdown filter
+    $availableMonths = DB::table('pemesanan')
+        ->select(DB::raw("DISTINCT DATE_FORMAT(created_at, '%Y-%m') as month"))
+        ->get()
+        ->pluck('month');
+
+    $selectedMonth = $filterMonth;
+
+    return view('backend.penjualan.index', compact('title', 'penjualan', 'total_penjualan', 'availableMonths', 'selectedMonth'));
     }
 
     public function add()
@@ -150,9 +174,10 @@ class PenjualanController extends Controller
             ->route('penjualan');
     }
 
-    public function downloadExcel()
+    public function downloadExcel(Request $request)
     {
         // Query data dari database
+        $filterMonth = $request->input('filter_month', date('Y-m'));
         $penjualan = DB::table('penjualan')
         ->join('distributor', 'distributor.id', '=' , 'penjualan.distributor_id')
         ->join('count_manager', 'count_manager.id', '=', 'distributor.count_manager_id')
@@ -162,6 +187,6 @@ class PenjualanController extends Controller
         ->get();
 
         // Export data ke file Excel
-        return Excel::download(new PenjualanExport($penjualan), 'rekap_data_penjualan.xlsx');
+        return Excel::download(new PenjualanExport($filterMonth), 'rekap_data_penjualan.xlsx');
     }
 }
