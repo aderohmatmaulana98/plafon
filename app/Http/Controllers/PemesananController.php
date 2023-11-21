@@ -71,4 +71,20 @@ class PemesananController extends Controller
 
         return view('backend.bos.barang',$data);
     }
+    public function hapus($id)
+    {
+        // Cari pesanan berdasarkan ID
+        $pesanan = Pemesanan::find($id);
+
+        // Jika pesanan tidak ditemukan, mungkin hendak menangani kasus ini
+        if (!$pesanan) {
+            return redirect()->back()->with('error', 'Pesanan tidak ditemukan.');
+        }
+
+        // Hapus pesanan
+        $pesanan->delete();
+        Alert::success('Barang berhasil dihapus');
+        // Redirect ke halaman sebelumnya dengan pesan sukses
+        return redirect()->back()->with('success', 'Pesanan berhasil dihapus.');
+    }
 }

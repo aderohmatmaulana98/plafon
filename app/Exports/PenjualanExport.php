@@ -23,18 +23,18 @@ class PenjualanExport implements FromCollection, WithHeadings, ShouldAutoSize, W
         $penjualan = DB::table('pemesanan')
             ->join('users', 'users.id', '=', 'pemesanan.id_user')
             ->join('distributor', 'users.id', '=', 'distributor.users_id')
-            ->join('count_manager', 'count_manager.id', '=', 'distributor.count_manager_id')
+            ->join('penjab', 'penjab.id', '=', 'distributor.penjab_id')
             ->where(DB::raw("DATE_FORMAT(pemesanan.created_at, '%Y-%m')"), '=', $this->filterMonth)
             ->where('status', 'lunas')
             ->groupBy('distributor.id')
-            ->select('count_manager.nama_cm', 'distributor.kode_distributor', 'users.full_name', 'distributor.area', DB::raw('SUM(harga) as jumlah_harga'))
+            ->select('penjab.nama_penjab', 'distributor.kode_distributor', 'users.full_name', 'distributor.area', DB::raw('SUM(harga) as jumlah_harga'))
             ->get();
 
         // Add total row
         $total_penjualan = DB::table('pemesanan')
             ->join('users', 'users.id', '=', 'pemesanan.id_user')
             ->join('distributor', 'users.id', '=', 'distributor.users_id')
-            ->join('count_manager', 'count_manager.id', '=', 'distributor.count_manager_id')
+            ->join('penjab', 'penjab.id', '=', 'distributor.penjab_id')
             ->where(DB::raw("DATE_FORMAT(pemesanan.created_at, '%Y-%m')"), '=', $this->filterMonth)
             ->where('status', 'lunas')
             ->select(DB::raw('SUM(harga) as jumlah_harga'))
@@ -43,7 +43,7 @@ class PenjualanExport implements FromCollection, WithHeadings, ShouldAutoSize, W
         $total_penjualan = $total_penjualan ? $total_penjualan->jumlah_harga : 0;
 
         $totalRow = [
-            'COUNT MANAGER' => 'Total',
+            'PENANGGUNG JAWAB' => 'Total',
             'KODE DISTRIBUTOR' => '',
             'DISTRIBUTOR' => '',
             'AREA' => '',
@@ -60,7 +60,7 @@ class PenjualanExport implements FromCollection, WithHeadings, ShouldAutoSize, W
         return [
             ["Laporan Penjualan Bulan $this->filterMonth"],
             [""],
-            ['COUNT MANAGER', 'KODE DISTRIBUTOR', 'DISTRIBUTOR', 'AREA', 'TOTAL PEMBELIAN'],
+            ['PENANGGUNG JAWAB', 'KODE DISTRIBUTOR', 'DISTRIBUTOR', 'AREA', 'TOTAL PEMBELIAN'],
         ];
     }
 

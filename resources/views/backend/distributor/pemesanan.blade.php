@@ -10,7 +10,7 @@
                 style="margin-left: 70%;">Add</a> --}}
         </div>
         <div class="container mt-4 ">
-            <table id="datatable" class="table table-striped ">
+            <table id="datatable" class="table ">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -56,8 +56,17 @@
                                
                                 @endif
                             </td>
-                            <td>
-                                <a href="/pemesanan/edit/{{ $a->id }}" type="button" class="btn btn-success">Edit</a>
+                            <td class="row p-2">
+                                <span class="col-md-6 p-0">
+                                    <a href="/pemesanan/edit/{{ $a->id }}" type="button" class="btn btn-success">Edit</a>
+                                </span>
+                                <span class="col-md-6 p-0">
+                                    <form action="{{ route('pesanan.hapus',$a->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus pesanan ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Hapus</button>
+                                    </form>
+                                </span>
                             </td>
                            
                         </tr>

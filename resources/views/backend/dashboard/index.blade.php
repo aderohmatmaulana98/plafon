@@ -14,12 +14,27 @@
     </style>
     <div class="container mt-4">
             <div class="col-lg-12 col-md-12 order-1">
+              <div class="form-group">
+                <form action="{{ route('index') }}" method="GET" id="filterForm">
+                  @csrf
+                  <div class="col-lg-4 col-md-4 col-4 mb-4">
+                      <div class="form-group">
+                          <label for="filterMonthYear">Pilih Bulan/Tahun:</label>
+                          <select class="form-control" id="filterMonthYear" name="filter_month_year" onchange="submitForm()">
+                              @foreach($availableMonths as $monthYear)
+                                  <option value="{{ $monthYear }}" {{ $monthYear == $filterMonthYear ? 'selected' : '' }}>{{ $monthYear }}</option>
+                              @endforeach
+                          </select>
+                      </div>
+                  </div>
+              </form>
+              </div>
                 <div class="row">
                   <div class="col-lg-4 col-md-4 col-4  mb-4">
                     <div class="card">
                       <div class="card-body">
                         <div class="card-title d-flex align-items-start justify-content-between">
-                            <span class="fw-semibold d-block mb-1">PEMBAYARAN LUNAS</span>
+                            <span class="fw-semibold d-block mb-1">PESANAN SELESAI</span>
                           <div class="avatar flex-shrink-0">
                             <img src="../assets/img/icons/unicons/chart-success.png" alt="chart success" class="rounded">
                           </div>
@@ -33,7 +48,7 @@
                     <div class="card">
                       <div class="card-body">
                         <div class="card-title d-flex align-items-start justify-content-between">
-                            <span>PEMBAYARAN BELUM LUNAS</span>
+                            <span>PESANAN BELUM SELESAI</span>
                           <div class="avatar flex-shrink-0">
                             <img src="../assets/img/icons/unicons/wallet-info.png" alt="Credit Card" class="rounded">
                           </div>
@@ -60,4 +75,9 @@
                 </div>
     </div>
     </div>
+    <script>
+      function submitForm() {
+          document.getElementById('filterForm').submit();
+      }
+  </script>
 @endsection

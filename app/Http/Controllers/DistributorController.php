@@ -18,11 +18,10 @@ class DistributorController extends Controller
          $data['title'] = 'Kelola Distributor';
 
          $distributor = DB::table('distributor')
-         ->join('count_manager', 'count_manager.id', '=','distributor.count_manager_id')
          ->join('penjab','penjab.id','=','distributor.penjab_id')
          ->join('users','users.id','=','distributor.users_id')
          ->select('users.id','distributor.kode_distributor','distributor.kontak','distributor.alamat','distributor.area','distributor.jumlah_agen',
-         'count_manager.nama_cm', 'penjab.nama_penjab','users.full_name','users.email','users.password')
+         'penjab.nama_penjab','users.full_name','users.email','users.password')
          ->where('users.role_id','=','2')
          ->get();
 
@@ -34,9 +33,8 @@ class DistributorController extends Controller
    public function add()
     {
         $data['title'] = "Tambah Distributor";
-        $cm = DB::table('count_manager')->get();
         $penjab = DB::table('penjab')->get();
-        return view('backend.distributor.add', ['cm' => $cm, 'penjab' => $penjab], $data);
+        return view('backend.distributor.add', ['penjab' => $penjab], $data);
     }
 
     public function edit($id)
@@ -51,10 +49,9 @@ class DistributorController extends Controller
       $data['title'] = 'Detail Distributor';
 
       $distributor = DB::table('distributor')
-         ->join('count_manager', 'distributor.count_manager_id', '=', 'count_manager.id')
          ->join('users', 'distributor.users_id', '=', 'users.id')
          ->join('penjab', 'distributor.penjab_id', '=', 'penjab.id')
-         ->select('users.full_name','users.email','users.password','count_manager.nama_cm',
+         ->select('users.full_name','users.email','users.password','penjab.nama_penjab',
          'penjab.nama_penjab','distributor.*')
          ->where('users.id', '=', $id)
          ->get();
@@ -71,7 +68,6 @@ public function addDistributor(Request $request)
             'full_name' => 'required',
             'email' => 'required|unique:users,email',
             'password' => 'reqired',
-            'count_manager_id' => 'required',
             'kode_distributor' => 'required',
             'penjab_id' => 'required',
             'alamat' => 'required',
@@ -92,7 +88,6 @@ public function addDistributor(Request $request)
         ];
 
         $distributor = [
-            'count_manager_id' => $request->count_manager_id,
             'kode_distributor' => $request->kode_distributor,
             'users_id' => $id_user,
             'penjab_id' => $request->penjab_id,

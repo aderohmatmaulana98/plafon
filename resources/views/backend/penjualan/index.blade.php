@@ -44,7 +44,7 @@
                 <thead>
                     <tr>
                         
-                        <th rowspan="2">COUNT MANAGER</th>
+                        <th rowspan="2">PENANGGUNG JAWAB</th>
                         <th rowspan="2">KODE DISTRIBUTOR</th>
                         <th rowspan="2">DISTRIBUTOR</th>
                         <th rowspan="2">AREA</th>
@@ -58,7 +58,7 @@
                     @foreach ($penjualan as $item)
                         <tr>
                             {{-- <td>{{ $no++ }}</td> --}}
-                            <td width="auto">{{ $item->nama_cm }}</td>
+                            <td width="auto">{{ $item->nama_penjab }}</td>
                             <td width="auto">{{ $item->kode_distributor}}</td>
                             <td width="auto">{{ $item->full_name}}</td>
                             <td width="auto">{{ $item->area}}</td>                             

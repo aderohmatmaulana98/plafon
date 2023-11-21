@@ -21,16 +21,6 @@
                                     @enderror
                                 </div>
                             </div>
-                            
-                            <div class="col-md-6">
-                                <label class="form-label" for="jenis">Count Manager</label>
-                                <select class="form-select form-select" aria-label=".form-select-sm example" name="count_manager_id" id="count_manager_id">
-                                <option selected>-Pilih Count Manager-</option>
-                                    @foreach($cm as $c)
-                                        <option value="{{ $c->id }}" >{{ $c->nama_cm }}</option>
-                                        @endforeach
-                                </select>
-                            </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label" for="full_name">Nama Distributor</label>

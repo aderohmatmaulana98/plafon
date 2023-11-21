@@ -107,6 +107,7 @@ Route::controller(PemesananController::class)->group( function (){
     Route::get('/pemesanan','index')->name('pemesanan');
     Route::get('/pemesanan/edit/{id}','edit')->name('pemesanan.edit');
     Route::post('/editPemesanan/{id}','edit_pemesanan')->name('pemesanan.editPemesanan');
+    Route::delete('/hapus-pesanan/{id}', 'hapus')->name('pesanan.hapus');
     Route::get('/barang-bos','showBarang')->name('barang-bos');
 });
 });

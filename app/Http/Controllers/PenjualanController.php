@@ -22,7 +22,7 @@ class PenjualanController extends Controller
     $penjualanQuery = DB::table('pemesanan')
         ->join('users', 'users.id', '=', 'pemesanan.id_user')
         ->join('distributor', 'users.id', '=', 'distributor.users_id')
-        ->join('count_manager', 'count_manager.id', '=', 'distributor.count_manager_id')
+        ->join('penjab', 'penjab.id', '=', 'distributor.penjab_id')
         ->where('status', 'lunas')
         ->groupBy('users.id');
 
@@ -32,13 +32,13 @@ class PenjualanController extends Controller
     }
 
     $penjualan = $penjualanQuery
-        ->select('count_manager.nama_cm', 'users.full_name', 'distributor.area', 'distributor.kode_distributor', DB::raw('SUM(harga) as jumlah_harga'))
+        ->select('penjab.nama_penjab', 'users.full_name', 'distributor.area', 'distributor.kode_distributor', DB::raw('SUM(harga) as jumlah_harga'))
         ->get();
 
     $total_penjualanQuery = DB::table('pemesanan')
         ->join('users', 'users.id', '=', 'pemesanan.id_user')
         ->join('distributor', 'users.id', '=', 'distributor.users_id')
-        ->join('count_manager', 'count_manager.id', '=', 'distributor.count_manager_id')
+        ->join('penjab', 'penjab.id', '=', 'distributor.penjab_id')
         ->where('status', 'lunas');
 
     // Gunakan kondisi tambahan jika filter bukan "All"
@@ -67,7 +67,7 @@ class PenjualanController extends Controller
         $data['title'] = "Tambah Penjualan";
         $data1 = DB::table('distributor')
         ->join('users','users.id','=','distributor.users_id')
-        ->select('distributor.id','distributor.count_manager_id','distributor.kode_distributor',
+        ->select('distributor.id','distributor.penjab_id','distributor.kode_distributor',
           'distributor.area','users.full_name')
         ->get();
         
@@ -81,11 +81,11 @@ class PenjualanController extends Controller
         $penjualan = DB::table('pemesanan')
         ->join('users','users.id', '=', 'pemesanan.id_user')
         ->join('distributor','users.id', '=', 'distributor.users_id')
-        ->join('count_manager','count_manager.id', '=', 'distributor.count_manager_id')
+        ->join('penjab','penjab.id', '=', 'distributor.penjab_id')
         ->where(DB::raw("DATE_FORMAT(pemesanan.created_at, '%Y-%m')"), '=', '2023-11')
         ->where('status', 'lunas')
         ->groupBy('users.id')
-        ->select('count_manager.nama_cm','users.full_name', DB::raw('SUM(harga) as jumlah_harga'))
+        ->select('penjab.nama_penjab','users.full_name', DB::raw('SUM(harga) as jumlah_harga'))
         ->get();
         // $distributorJanuari = DB::table('distributor')
         //                         ->join('users', 'users.id', '=', 'distributor.id_user')
@@ -180,10 +180,10 @@ class PenjualanController extends Controller
         $filterMonth = $request->input('filter_month', date('Y-m'));
         $penjualan = DB::table('penjualan')
         ->join('distributor', 'distributor.id', '=' , 'penjualan.distributor_id')
-        ->join('count_manager', 'count_manager.id', '=', 'distributor.count_manager_id')
+        ->join('penjab', 'penjab.id', '=', 'distributor.penjab_id')
         ->join('users','users.id','=','distributor.users_id')
-        ->select('penjualan.*', 'distributor.count_manager_id','distributor.kode_distributor',
-          'distributor.area','users.full_name','count_manager.nama_cm')
+        ->select('penjualan.*', 'distributor.penjab_id','distributor.kode_distributor',
+          'distributor.area','users.full_name','penjab.nama_penjab')
         ->get();
 
         // Export data ke file Excel

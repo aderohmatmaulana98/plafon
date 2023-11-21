@@ -43,12 +43,6 @@
                             <div>Kelola Penanggung Jawab</div>
                         </a>
                     </li>
-                    
-                    <li class="menu-item ">
-                        <a href="/cm" class="menu-link">
-                            <div>Kelola Count Manager</div>
-                        </a>
-                    </li>
                     <li class="menu-item ">
                         <a href="/penjualan" class="menu-link">
                             <div>Penjualan</div>
