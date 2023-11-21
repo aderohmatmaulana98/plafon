@@ -47,7 +47,7 @@ class PenjualanExport implements FromCollection, WithHeadings, ShouldAutoSize, W
             'KODE DISTRIBUTOR' => '',
             'DISTRIBUTOR' => '',
             'AREA' => '',
-            'TOTAL PEMBELIAN' => $total_penjualan,
+            'TOTAL PEMBELIAN KESELURUHAN' => $total_penjualan,
         ];
 
         $penjualan->push($totalRow); // Append the total row to the collection

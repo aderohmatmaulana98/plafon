@@ -69,7 +69,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="4" style="text-align: center"><b>TOTAL PEMBELIAN</b></td>
+                        <td colspan="4" style="text-align: center"><b>TOTAL PEMBELIAN KESELURUHAN</b></td>
                         <td>{{'Rp. '. number_format($total_penjualan, 0, ',', '.'). ',00' }}</td>
                         
                     </tr>

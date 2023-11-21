@@ -3,7 +3,7 @@
 <!-- Google Tag Manager (noscript) (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
 
 <!-- Content -->
-<div class="container-xxxl" style="background-image: url('assets/img/bg-01.jpg');">
+<div class="container-xxxl" style="background-color: #e0dcdc">
     {{-- <div class="container-xxxl wrap-login100"> --}}
     <div class="authentication-wrapper authentication-basic container-p-y">
         <div class="authentication-inner">
@@ -76,7 +76,7 @@
                     <form id="formAuthentication" method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="mb-3">
-                            <label for="email" class="form-label" style="color: black">Email or Username</label>
+                            <label for="email" class="form-label" style="color: black">Email</label>
                             <input type="text" style="color: black" class="form-control @error('email') is-invalid @enderror"
                                 value="{{ old('email') }}" required id="email" name="email"
                                 placeholder="Enter your email" autofocus>
@@ -93,20 +93,7 @@
                                     aria-describedby="password" />
                                 <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                             </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="remember-me"
-                                    {{ old('remember') ? 'checked' : '' }}>
-                                <label class="form-check-label"  style="color: black" for="remember-me">
-                                    Remember Me
-                                </label>
-                                <br>
-                                <a href="#">
-                                    <small>Forgot Password?</small>
-                                </a>
-                            </div>
-                        </div>
+                        </div>                        
                         <div class="col">
                             <button class="col btn btn-dark-blue d-grid w-100" style="color: white">{{ __('Sign in') }}</button>
                         </div>

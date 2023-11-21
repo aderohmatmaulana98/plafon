@@ -19,7 +19,7 @@
                     <div class="card">
                       <div class="card-body">
                         <div class="card-title d-flex align-items-start justify-content-between">
-                            <span class="fw-semibold d-block mb-1">PESANAN SELESAI</span>
+                            <span class="fw-semibold d-block mb-1">PEMBAYARAN LUNAS</span>
                           <div class="avatar flex-shrink-0">
                             <img src="../assets/img/icons/unicons/chart-success.png" alt="chart success" class="rounded">
                           </div>
@@ -33,7 +33,7 @@
                     <div class="card">
                       <div class="card-body">
                         <div class="card-title d-flex align-items-start justify-content-between">
-                            <span>PESANAN BELUM SELESAI</span>
+                            <span>PEMBAYARAN BELUM LUNAS</span>
                           <div class="avatar flex-shrink-0">
                             <img src="../assets/img/icons/unicons/wallet-info.png" alt="Credit Card" class="rounded">
                           </div>
