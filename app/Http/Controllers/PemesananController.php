@@ -27,6 +27,16 @@ class PemesananController extends Controller
     public function edit($id)
     {
             $data['title'] = "Edit Pemesanan";
+            $pemesanan = DB::table('pemesanan')
+            ->join('users','pemesanan.id_user','=','users.id')
+            ->join('barang','pemesanan.id_barang','=','barang.id')
+            ->where('pemesanan.id',$id)
+            ->select('pemesanan.*','barang.nama_barang', 'users.full_name')
+            ->first();
+            if ($pemesanan->status == 'belum bayar') {
+                Alert::error('Pesanan belum dibayarkan');
+                return redirect()->route('pemesanan');
+            }
             $pemesanan = DB::table('pemesanan')->where('id', $id)->first();
             return view('backend.distributor.edit_pemesanan', compact('pemesanan'), $data);
     }

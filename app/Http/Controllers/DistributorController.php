@@ -113,24 +113,14 @@ public function addDistributor(Request $request)
 
    public function deleteDistributor($id)
    {
-     
-      DB::beginTransaction();
-
+      
         try {
-            DB::table('users')
-                ->where('id', $id)
-                ->delete();
+             DB::table('users')->where('users.id', '=', $id)->delete();
 
-            DB::table('distributor')
-                ->where('users_id', $id)
-                ->delete();
-
-            DB::commit();
-
+            Alert::success('Data Distributor berhasil di Hapus');
             return redirect()
                 ->route('distributor');
 
-                Alert::success('Data Distributor berhasil di Hapus');
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()

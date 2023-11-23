@@ -57,7 +57,7 @@
                                 @endif
                             </td>
                             <td class="row p-2">
-                                <span class="col-md-6 p-0">
+                                <span class="col-md-6 p-0">                                    
                                     <a href="/pemesanan/edit/{{ $a->id }}" type="button" class="btn btn-success">Edit</a>
                                 </span>
                                 <span class="col-md-6 p-0">

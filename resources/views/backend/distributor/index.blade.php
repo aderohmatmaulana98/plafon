@@ -47,10 +47,10 @@
                               @endif  
                             </td>
                             <td>
-                                <a href="{{ route('detail.distributor', $a->id) }}" <i class="far fa-eye badge-primary"></i></a>
+                                <a class="btn btn-primary" href="{{ route('detail.distributor', $a->id) }}"> <i class="far fa-eye badge-primary"></i></a>
                                 {{-- <a href="/cm/edit/{{ $a->id }}"> <i class="fas fa-edit badge-success"></i></a> --}}
-                                <i class="fas fa-trash badge-danger" data-bs-toggle="modal"
-                                    data-bs-target="#delete{{ $a->id }}"></i> 
+                                <button class="btn btn-danger"><i class="fas fa-trash badge-danger" data-bs-toggle="modal"
+                                    data-bs-target="#delete{{ $a->id }}"></i> </button>
                             </td>
                             <div class="modal fade" id="delete{{ $a->id }}" tabindex="-1" role="dialog"
                                 aria-labelledby="deletemodal" aria-hidden="true">

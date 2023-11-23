@@ -15,7 +15,7 @@
                                 <div class="mb-3">
                                     <label class="form-label" for="kode_distributor">Kode Distributor</label>
                                     <input type="number" class="form-control @error('kode_distributor') is-invalid @enderror" value="{{ old('kode_distributor') }}" id="kode_distributor" name="kode_distributor"
-                                    value="" placeholder="Masukan kode distributor" />
+                                    value="" placeholder="Masukan kode distributor" required />
                                         @error('kode_distributor')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
@@ -25,7 +25,7 @@
                                 <div class="mb-3">
                                     <label class="form-label" for="full_name">Nama Distributor</label>
                                     <input type="text" class="form-control @error('full_name') is-invalid @enderror" value="{{ old('full_name') }}" id="full_name"  name="full_name"
-                                    value="" placeholder="Masukan Nama Distributor" />
+                                    value="" placeholder="Masukan Nama Distributor" required />
                                     @error('full_name')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -34,8 +34,8 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label" for="penjab_id">Penanggung Jawab</label>
-                                    <select class="form-select form-select" aria-label=".form-select-sm example" name="penjab_id" id="penjab_id">
-                                        <option selected>-Pilih Penanggung Jawab-</option>
+                                    <select class="form-select " name="penjab_id" id="penjab_id" required>
+                                        <option value="" selected>-Pilih Penanggung Jawab-</option>
                                                 @foreach($penjab as $pj)
                                                 <option value="{{ $pj->id }}" >{{ $pj->nama_penjab }}</option>
                                                 @endforeach
@@ -46,7 +46,7 @@
                                 <div class="mb-3">
                                     <label class="form-label" for="email">Email</label>
                                     <input type="email" class="form-control @error('email')  is-invalid @enderror" value="{{ old('email') }}" id="email" name="email"
-                                        placeholder="Masukan Email">
+                                        placeholder="Masukan Email" required>
                                         @error('email')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -56,7 +56,7 @@
                                 <div class="mb-3">
                                     <label class="form-label" for="kontak">Kontak/No HP</label>
                                     <input type="number" class="form-control @error('kontak')  is-invalid @enderror" value="{{ old('kontak') }}" id="kontak" name="kontak"
-                                        placeholder="Masukan No Hp">
+                                        placeholder="Masukan No Hp" required>
                                         @error('kontak')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
@@ -66,7 +66,7 @@
                                 <div class="mb-3">
                                     <label class="form-label" for="alamat">Alamat</label>
                                     <input type="text" class="form-control @error('alamat')  is-invalid @enderror" value="{{ old('alamat') }}" id="alamat" name="alamat"
-                                        placeholder="Masukan alamat"> </input>
+                                        placeholder="Masukan alamat" required>
                                         @error('alamat')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
@@ -76,7 +76,7 @@
                                 <div class="mb-3">
                                     <label class="form-label" for="area">Area Cover</label>
                                     <input type="text" class="form-control @error('area')  is-invalid @enderror" value="{{ old('area') }}" id="area" name="area"
-                                        placeholder="Masukan area">
+                                        placeholder="Masukan area" required>
                                         @error('area')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
@@ -86,7 +86,7 @@
                                 <div class="mb-3">
                                     <label class="form-label" for="jumlah_agen">Jumlah Agen / Distributor</label>
                                     <input type="text" class="form-control @error('jumlah_agen')  is-invalid @enderror" value="{{ old('jumlah_agen') }}" id="jumlah_agen" name="jumlah_agen"
-                                        placeholder="Masukan Jumlah agen">
+                                        placeholder="Masukan Jumlah agen" required>
                                         @error('jumlah_agen')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror

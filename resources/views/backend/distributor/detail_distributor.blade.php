@@ -11,11 +11,6 @@
             <div class="table-responsive">
                 <table class="table table-striped ">
                     <tr>
-                        <th scope="col" style="width: 400px;">Count Manager</th>
-                        <td style="width: 0px;">:</td>
-                        <td>{{ $distributor[0]->nama_cm}}</td>
-                    </tr>
-                    <tr>
                         <th scope="col" style="width: 400px;">Kode Distributor</th>
                         <td style="width: 0px;">:</td>
                         <td>{{ $distributor[0]->kode_distributor }}</td>
