@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Session;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AuthController extends Controller
 {
@@ -41,6 +42,7 @@ class AuthController extends Controller
             session(['access_token' => $data['data']]);
             return redirect()->route('index');
         } else {
+            Alert::error('Email atau password salah');
             return redirect()->back();
         }
     }

@@ -93,7 +93,7 @@ class PemesananController extends Controller
 
         // Hapus pesanan
         $pesanan->delete();
-        Alert::success('Barang berhasil dihapus');
+        Alert::success('Pesanan berhasil dihapus');
         // Redirect ke halaman sebelumnya dengan pesan sukses
         return redirect()->back()->with('success', 'Pesanan berhasil dihapus.');
     }

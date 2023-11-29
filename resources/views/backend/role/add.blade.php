@@ -15,7 +15,7 @@
                                 <div class="mb-3">
                                     <label class="form-label" for="role">Nama Role</label>
                                     <input type="text" class="form-control" id="role" name="role"
-                                        placeholder="Masukan Nama Role" />
+                                        placeholder="Masukan Nama Role" required />
                                 </div>
                             </div>                            
                             <div class="col-md-12">

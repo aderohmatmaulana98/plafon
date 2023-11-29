@@ -16,7 +16,7 @@
                                 <div class="mb-3">
                                     <label class="form-label" for="role">Nama Role</label>
                                     <input type="text" class="form-control" id="role" name="role"
-                                        placeholder="Masukan Nama Role" value="{{ $role->role }}" />
+                                        placeholder="Masukan Nama Role" value="{{ $role->role }}" required/>
                                 </div>
                             </div>
 
